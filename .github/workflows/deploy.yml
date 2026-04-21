@@ -1,0 +1,24 @@
+name: Deploy Portfolio Website
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Deploy via SSH
+      uses: appleboy/ssh-action@v0.1.6
+      with:
+        host: ${{ secrets.HOST }}
+        username: ubuntu
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          cd ~/portfolio
+          git pull
+          docker build -t portfolio-app .
+          docker stop portfolio || true
+          docker rm portfolio || true
+          docker run -d -p 8080:80 --restart always --name portfolio portfolio-app
