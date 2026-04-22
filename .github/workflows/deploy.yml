@@ -16,9 +16,17 @@ jobs:
         username: ubuntu
         key: ${{ secrets.SSH_KEY }}
         script: |
-          cd ~/portfolio
+          # ensure repo exists
+          if [ ! -d "$HOME/portfoliowebsite" ]; then
+            git clone https://github.com/mayankrajputofficial/portfoliowebsite.git $HOME/portfoliowebsite
+          fi
+
+          cd $HOME/portfoliowebsite
           git pull
+
           docker build -t portfolio-app .
+
           docker stop portfolio || true
           docker rm portfolio || true
+
           docker run -d -p 8080:80 --restart always --name portfolio portfolio-app
