@@ -1,33 +1,280 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" data-theme="dark">
 <head>
-  <title>Blog - Mayank</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Mayank Rajput's DevOps blog — real debugging stories and infrastructure lessons." />
+  <title>Blog — Mayank Rajput</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .blog-hero {
+      padding: clamp(48px,6vw,80px) clamp(20px,5vw,64px) clamp(32px,4vw,48px);
+      border-bottom: 1px solid var(--border);
+    }
+    .blog-hero-inner { max-width: 1200px; margin: 0 auto; }
+    .blog-eyebrow {
+      font-family: var(--mono); font-size: 12px; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px;
+    }
+    .blog-hero h1 {
+      font-size: clamp(36px,5vw,62px); font-weight: 800;
+      letter-spacing: -1.5px; line-height: 1.05; color: var(--fg); margin-bottom: 14px;
+    }
+    .blog-hero p { font-size: 18px; color: var(--fg2); max-width: 540px; line-height: 1.7; }
+    .blog-medium-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 20px; font-family: var(--mono); font-size: 13px;
+      color: var(--fg3); text-decoration: none;
+      padding: 8px 16px; border: 1.5px solid var(--border); border-radius: 7px;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .blog-medium-link:hover { border-color: var(--accent); color: var(--accent); }
+    .blog-medium-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
+      flex-shrink: 0; animation: pulse 2s infinite;
+    }
+
+    .blog-feed {
+      max-width: 1200px; margin: 0 auto;
+      padding: clamp(40px,5vw,64px) clamp(20px,5vw,64px) clamp(64px,8vw,100px);
+      min-height: 40vh;
+    }
+
+    /* Loading */
+    .feed-status {
+      display: flex; align-items: center; gap: 14px;
+      font-family: var(--mono); font-size: 14px; color: var(--fg3);
+      padding: 48px 0;
+    }
+    .feed-status-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
+      animation: pulse 1s infinite; flex-shrink: 0;
+    }
+
+    /* Post list — editorial, horizontal layout */
+    .post-list { display: flex; flex-direction: column; }
+
+    .post-item {
+      display: flex; align-items: baseline;
+      gap: clamp(16px, 3vw, 48px);
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none; color: inherit;
+      transition: padding-left 0.2s;
+      position: relative;
+    }
+    .post-item::before {
+      content: '';
+      position: absolute; left: -4px; top: 0; bottom: 0; width: 3px;
+      background: var(--accent);
+      transform: scaleY(0); transform-origin: top;
+      transition: transform 0.2s;
+      border-radius: 0 2px 2px 0;
+    }
+    .post-item:hover { padding-left: 12px; }
+    .post-item:hover::before { transform: scaleY(1); }
+    .post-item:first-child { border-top: 1px solid var(--border); }
+
+    .post-date {
+      font-family: var(--mono); font-size: 12px; color: var(--fg3);
+      flex-shrink: 0; min-width: 88px;
+    }
+    .post-title-wrap { flex: 1; }
+    .post-title {
+      font-size: clamp(15px, 1.2vw + 12px, 19px);
+      font-weight: 600; color: var(--fg); line-height: 1.35;
+      margin-bottom: 6px; transition: color 0.15s;
+    }
+    .post-item:hover .post-title { color: var(--accent); }
+    .post-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .post-tag {
+      font-family: var(--mono); font-size: 11px;
+      padding: 3px 9px; border-radius: 4px;
+      background: var(--bg2); color: var(--fg3); border: 1px solid var(--border);
+    }
+    .post-arrow {
+      font-size: 18px; color: var(--fg3); flex-shrink: 0;
+      transition: color 0.15s, transform 0.2s;
+    }
+    .post-item:hover .post-arrow { color: var(--accent); transform: translateX(5px); }
+
+    /* Empty state */
+    .feed-empty {
+      background: var(--white); border: 1.5px solid var(--border);
+      border-radius: 12px; padding: 56px 40px; text-align: center;
+    }
+    .feed-empty-icon { font-size: 36px; margin-bottom: 16px; opacity: 0.35; }
+    .feed-empty h3 { font-size: 20px; font-weight: 700; color: var(--fg); margin-bottom: 10px; }
+    .feed-empty p {
+      font-size: 15px; color: var(--fg2); line-height: 1.7;
+      max-width: 380px; margin: 0 auto 24px;
+    }
+    .feed-empty a {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: var(--mono); font-size: 13px; font-weight: 600;
+      color: var(--btn-text); background: var(--btn-bg);
+      padding: 10px 22px; border-radius: 8px; text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .feed-empty a:hover { opacity: 0.85; }
+
+    /* Error state */
+    .feed-error {
+      background: var(--white); border: 1.5px solid var(--border);
+      border-radius: 12px; padding: 36px 40px;
+      font-family: var(--mono); font-size: 14px; color: var(--fg3); line-height: 1.8;
+    }
+    .feed-error a { color: var(--accent); }
+
+    @media (max-width: 600px) {
+      .post-item { flex-wrap: wrap; gap: 6px; }
+      .post-arrow { display: none; }
+      .post-date { min-width: auto; }
+    }
+  </style>
 </head>
 <body>
 
-<nav class="container">
+<nav class="page-nav" aria-label="Main navigation">
+  <a href="/" class="nav-logo-small">Mayank Rajput</a>
   <a href="/">Home</a>
-  <a href="/blog.html">Blog</a>
+  <a href="/blog.html" style="color:var(--accent);">Blog</a>
+  <a href="/#contact">Contact</a>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">☀</button>
 </nav>
 
-<div class="container">
-  <h1>Blog</h1>
-
-  <ul>
-    <li>
-      <a href="/posts/nginx-debug.html">
-        Debugging Nginx 504 Gateway Timeout
-      </a>
-    </li>
-
-    <li>
-      <a href="/posts/iptables-lesson.html">
-        Understanding iptables through real issue
-      </a>
-    </li>
-  </ul>
+<!-- Hero -->
+<div class="blog-hero">
+  <div class="blog-hero-inner">
+    <div class="blog-eyebrow">Writing</div>
+    <h1>Real debugging.<br>Real infrastructure.</h1>
+    <p>No tutorial fluff — just the problems I hit, how I fixed them, and what I learned building on Oracle Cloud.</p>
+    <a href="https://medium.com/@mayankrajputofficial" target="_blank" rel="noopener noreferrer" class="blog-medium-link">
+      <span class="blog-medium-dot"></span>
+      Follow on Medium &rarr;
+    </a>
+  </div>
 </div>
+
+<!-- Live feed from Medium RSS -->
+<div class="blog-feed" id="blog-feed">
+  <div class="feed-status" id="feed-status">
+    <div class="feed-status-dot"></div>
+    Loading posts from Medium…
+  </div>
+</div>
+
+<footer>
+  <span>&copy; <span id="currentYear"></span> Mayank Rajput</span>
+  <span>&middot;</span>
+  <a href="https://techymayank.com">techymayank.com</a>
+  <div class="footer-divider"></div>
+  <a href="https://github.com/mayankrajputofficial" target="_blank" rel="noopener noreferrer">GitHub &rarr;</a>
+  <a href="https://medium.com/@mayankrajputofficial" target="_blank" rel="noopener noreferrer">Medium &rarr;</a>
+</footer>
+
+<script>
+document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+// Theme
+(function() {
+  var saved = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  document.addEventListener('DOMContentLoaded', function() {
+    var btn = document.getElementById('theme-toggle');
+    function updateIcon() {
+      btn.textContent = document.documentElement.getAttribute('data-theme') === 'dark' ? '☀' : '☾';
+    }
+    updateIcon();
+    btn.addEventListener('click', function() {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      var next = isDark ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      updateIcon();
+    });
+  });
+})();
+
+// Fetch posts from Medium RSS via rss2json (free proxy, handles CORS)
+(async function() {
+  var container = document.getElementById('blog-feed');
+  var MEDIUM_USERNAME = 'mayankrajputofficial';
+  var RSS_URL = 'https://medium.com/feed/@' + MEDIUM_USERNAME;
+  var API_URL = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(RSS_URL);
+
+  function formatDate(dateStr) {
+    var d = new Date(dateStr);
+    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  }
+
+  function renderEmpty() {
+    container.innerHTML =
+      '<div class="feed-empty">' +
+        '<div class="feed-empty-icon">✍️</div>' +
+        '<h3>No posts yet</h3>' +
+        '<p>I\'m writing my first article right now. Follow on Medium to get notified when it\'s live.</p>' +
+        '<a href="https://medium.com/@' + MEDIUM_USERNAME + '" target="_blank" rel="noopener noreferrer">Follow on Medium &rarr;</a>' +
+      '</div>';
+  }
+
+  function renderError() {
+    container.innerHTML =
+      '<div class="feed-error">' +
+        'Could not load posts right now. ' +
+        'Read them directly on <a href="https://medium.com/@' + MEDIUM_USERNAME + '" target="_blank" rel="noopener noreferrer">Medium &rarr;</a>' +
+      '</div>';
+  }
+
+  function renderPosts(items) {
+    if (!items || items.length === 0) { renderEmpty(); return; }
+
+    var html = '<div class="post-list">';
+    items.forEach(function(item) {
+      var date  = formatDate(item.pubDate);
+      var title = item.title;
+      var url   = item.link;
+      var tags  = (item.categories || []).slice(0, 4);
+      var tagsHtml = tags.map(function(t) {
+        return '<span class="post-tag">' + escapeHtml(t) + '</span>';
+      }).join('');
+
+      html +=
+        '<a href="' + url + '" target="_blank" rel="noopener noreferrer" class="post-item">' +
+          '<div class="post-date">' + date + '</div>' +
+          '<div class="post-title-wrap">' +
+            '<div class="post-title">' + escapeHtml(title) + '</div>' +
+            (tagsHtml ? '<div class="post-tags">' + tagsHtml + '</div>' : '') +
+          '</div>' +
+          '<div class="post-arrow">&rarr;</div>' +
+        '</a>';
+    });
+    html += '</div>';
+    container.innerHTML = html;
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  try {
+    var res  = await fetch(API_URL);
+    if (!res.ok) throw new Error('Network response not ok');
+    var data = await res.json();
+    if (data.status === 'ok') {
+      renderPosts(data.items);
+    } else {
+      // rss2json returns status 'error' with message when feed has no posts yet
+      renderEmpty();
+    }
+  } catch (e) {
+    renderError();
+  }
+})();
+</script>
 
 </body>
 </html>

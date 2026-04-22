@@ -1,24 +1,154 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" data-theme="dark">
 <head>
-  <title>Nginx Debug</title>
-  <link rel="stylesheet" href="/styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Debugging Nginx 504 Gateway Timeout on Oracle Cloud — a real step-by-step walkthrough of a production networking issue." />
+  <title>Debugging Nginx 504 Gateway Timeout — Mayank Rajput</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
 
-<div class="container">
-  <h1>Debugging Nginx 504 Gateway Timeout</h1>
+<nav class="page-nav" aria-label="Main navigation">
+  <a href="/" class="nav-logo-small">Mayank Rajput</a>
+  <a href="/">Home</a>
+  <a href="/blog.html">Blog</a>
+  <a href="/#contact">Contact</a>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">☀</button>
+</nav>
 
-  <p>I encountered a 504 error while deploying my portfolio...</p>
+<article class="post-container">
 
-  <h2>Root Cause</h2>
-  <p>Firewall rules were blocking internal traffic...</p>
+  <div class="post-eyebrow">DevOps &middot; Networking &middot; Linux</div>
+  <h1 class="post-title">Debugging Nginx 504 Gateway Timeout</h1>
+  <div class="post-meta">
+    <span>April 2026</span>
+    <span>Mayank Rajput</span>
+    <span>OCI &middot; Docker &middot; Nginx &middot; iptables</span>
+  </div>
 
-  <h2>Fix</h2>
-  <pre>sudo iptables -I INPUT -p tcp --dport 80 -j ACCEPT</pre>
+  <div class="post-body">
 
-  <a href="/blog.html">← Back</a>
-</div>
+    <p>
+      My portfolio was live in Docker and Nginx was running fine — <code>curl localhost</code> returned the right HTML.
+      But when I hit the public IP from a browser, nothing. Just a timeout. This is the full debugging story.
+    </p>
+
+    <h2>The Situation</h2>
+    <p>
+      I had deployed my portfolio on an <strong>Oracle Cloud Free Tier VM</strong> (1 CPU, 1 GB RAM, Ubuntu).
+      Docker was running a container with Nginx serving static files on port 8080, with a host mapping of <code>80:8080</code>.
+      Everything checked out locally.
+    </p>
+
+    <h2>Step 1 — Eliminate Docker First</h2>
+    <p>Testing from inside the VM confirmed Docker and Nginx were not the problem:</p>
+    <pre>curl localhost
+# Returns correct HTML — container is healthy
+
+docker ps
+# PORTS: 0.0.0.0:80->8080/tcp — mapping looks right</pre>
+
+    <h2>Step 2 — Check the OCI Security List</h2>
+    <p>
+      Oracle Cloud has its own network security layer — the <strong>Security List</strong> on the subnet.
+      Port 80 (and 443) ingress rules need to be explicitly added. I confirmed they were present.
+      Still timing out.
+    </p>
+
+    <h2>Step 3 — Check if Nginx is Binding Correctly</h2>
+    <pre>sudo lsof -i :80
+# COMMAND  PID  USER  FD  TYPE  DEVICE  NODE  NAME
+# nginx   1459  root  ...  *:http</pre>
+    <p>Nginx was correctly listening on all interfaces (<code>*:http</code>). Not the issue.</p>
+
+    <h2>Step 4 — tcpdump Reveals the Truth</h2>
+    <p>
+      Running <code>tcpdump</code> on the VM while hitting the public IP from my browser told the real story:
+    </p>
+    <pre>sudo tcpdump -i any port 80
+# Packets arrived at the VM — but no response was sent back</pre>
+    <p>
+      Packets were making it through the OCI Security List and reaching the VM. 
+      But something on the <strong>OS level</strong> was dropping them silently.
+    </p>
+
+    <h2>Root Cause — iptables DROP Rule</h2>
+    <p>
+      Oracle Cloud VMs ship with a default <code>iptables</code> rule that <strong>drops all inbound traffic</strong>
+      not explicitly allowed. The rule was processed before Nginx could handle the request:
+    </p>
+    <pre>sudo iptables -L INPUT --line-numbers -n
+# Chain INPUT (policy ACCEPT 0 packets)
+# 1  ACCEPT  all  --  0.0.0.0/0  0.0.0.0/0  state RELATED,ESTABLISHED
+# 2  ACCEPT  icmp --  0.0.0.0/0  0.0.0.0/0
+# 3  ACCEPT  all  --  0.0.0.0/0  0.0.0.0/0  (lo interface)
+# 4  ACCEPT  tcp  --  0.0.0.0/0  0.0.0.0/0  dport 22
+# 5  REJECT  all  --  0.0.0.0/0  0.0.0.0/0  &lt;-- EVERYTHING ELSE DROPPED</pre>
+    <p>Port 80 was not in the ACCEPT rules. Line 5 was rejecting it.</p>
+
+    <h2>The Fix</h2>
+    <pre>sudo iptables -I INPUT 5 -p tcp --dport 80 -j ACCEPT
+sudo iptables -I INPUT 6 -p tcp --dport 443 -j ACCEPT</pre>
+    <p>
+      Using <code>-I INPUT 5</code> inserts the rule <strong>before</strong> the REJECT line — order matters in iptables.
+      If you append with <code>-A</code>, the REJECT rule wins because it's evaluated first.
+    </p>
+
+    <h2>Making It Persistent</h2>
+    <pre>sudo apt install iptables-persistent -y
+sudo netfilter-persistent save</pre>
+    <p>Without this, the rules reset on reboot.</p>
+
+    <h2>What I Learned</h2>
+    <p>
+      There are <strong>three separate firewall layers</strong> on an OCI VM — all three need to allow traffic:
+    </p>
+    <ul>
+      <li><strong>OCI Security List</strong> — network-level, configured in the OCI console</li>
+      <li><strong>OS iptables</strong> — kernel-level, configured on the VM itself</li>
+      <li><strong>UFW / application firewall</strong> — not present on Oracle's default image, but worth checking</li>
+    </ul>
+    <p>
+      <code>tcpdump</code> is the fastest way to determine at which layer packets are being dropped.
+      If you see traffic arriving but no response leaving — it's the OS firewall, not the cloud security group.
+    </p>
+
+    <a href="/blog.html" class="post-back">&larr; Back to Blog</a>
+
+  </div>
+</article>
+
+<footer>
+  <span>&copy; <span id="currentYear"></span> Mayank Rajput</span>
+  <div class="footer-divider"></div>
+  <a href="/blog.html">Blog &rarr;</a>
+</footer>
+
+<script>
+document.getElementById('currentYear').textContent = new Date().getFullYear();
+(function() {
+  var saved = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  document.addEventListener('DOMContentLoaded', function() {
+    var btn = document.getElementById('theme-toggle');
+    function updateIcon() {
+      btn.textContent = document.documentElement.getAttribute('data-theme') === 'dark' ? '☀' : '☾';
+    }
+    updateIcon();
+    btn.addEventListener('click', function() {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      var next = isDark ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      updateIcon();
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
