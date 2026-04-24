@@ -1,18 +1,18 @@
 {
-  "fetchedAt": "2026-04-24T09:55:21Z",
+  "fetchedAt": "2026-04-24T13:05:24Z",
   "count": 1,
   "posts": [
     {
-      "title": "#1 How I Spent 3 Hours Debugging a Port 80 Timeout (And What I Actually Learned About iptables)",
+      "title": "How I Spent 3 Hours Debugging a Port 80 Timeout (And What I Actually Learned About iptables)",
       "url": "https://medium.com/@mayankrajputofficial/1-how-i-spent-3-hours-debugging-a-port-80-timeout-and-what-i-actually-learned-about-iptables-b66a3e9a94c4?source=rss-177b09611d3e------2",
       "date": "22 Apr 2026",
       "rawDate": "Wed, 22 Apr 2026 12:02:15 GMT",
       "excerpt": "",
       "tags": [
-        "devops",
         "devops-tool",
         "ci-cd-pipeline",
-        "devops-training"
+        "devops-training",
+        "linux"
       ]
     }
   ]
