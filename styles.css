@@ -160,10 +160,7 @@ section {
 #about, #contact { background: var(--bg2); }
 
 /* ── Hero ── */
-.hero {
-  padding: clamp(48px, 7vw, 96px) 0 clamp(48px, 6vw, 80px);
-  /* flex defined in hero-photo block below */
-}
+/* hero padding & grid defined in hero-photo block below */
 .hero-eyebrow {
   font-family: var(--mono); font-size: 14px;
   color: var(--accent); letter-spacing: 0.1em;
@@ -209,67 +206,71 @@ section {
 }
 .social-chip:hover { border-color: var(--fg3); color: var(--fg); }
 
-/* ── Hero photo ── */
+/* ── Hero layout — proper 50/50 split ── */
 .hero {
-  display: flex;
-  align-items: flex-start;
-  gap: clamp(32px, 5vw, 80px);
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 40px;
+  padding: clamp(48px, 7vw, 96px) 0 clamp(48px, 6vw, 80px);
 }
+.hero-content { min-width: 0; }
+
+/* ── Hero photo ── */
 .hero-photo-wrap {
-  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
-  padding-top: clamp(24px, 4vw, 56px);
+  justify-content: center;
+  gap: 18px;
 }
 .hero-photo-ring {
-  width: clamp(160px, 18vw, 240px);
-  height: clamp(160px, 18vw, 240px);
+  width: clamp(220px, 26vw, 300px);
+  height: clamp(220px, 26vw, 300px);
   border-radius: 50%;
-  padding: 4px;
+  padding: 5px;
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
-  box-shadow: 0 0 0 1px var(--border), 0 8px 32px rgba(37,99,235,0.18);
-  position: relative;
+  box-shadow: 0 0 0 1px var(--border), 0 12px 48px rgba(37,99,235,0.22);
+  flex-shrink: 0;
 }
 .hero-photo {
   width: 100%;
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 15%;
   display: block;
-  /* Subtle vignette to blend edges into the ring */
-  box-shadow: inset 0 0 12px rgba(0,0,0,0.15);
 }
 .hero-photo-tag {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   font-family: var(--mono);
   font-size: 12px;
   color: var(--fg3);
   background: var(--white);
   border: 1.5px solid var(--border);
   border-radius: 20px;
-  padding: 5px 14px;
+  padding: 6px 16px;
   white-space: nowrap;
 }
 .hero-photo-dot {
-  width: 7px; height: 7px;
+  width: 8px; height: 8px;
   border-radius: 50%;
   background: #22c55e;
   flex-shrink: 0;
   animation: pulse 2s infinite;
 }
-@media (max-width: 768px) {
-  .hero { flex-direction: column-reverse; align-items: flex-start; gap: 24px; }
-  .hero-photo-wrap { flex-direction: row; align-items: center; gap: 16px; padding-top: 0; }
-  .hero-photo-ring { width: 80px; height: 80px; }
-  .hero-photo-tag { font-size: 11px; }
-}
 
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding-top: clamp(32px, 5vw, 56px);
+  }
+  .hero-photo-wrap { order: -1; flex-direction: row; gap: 16px; justify-content: flex-start; }
+  .hero-photo-ring { width: 72px; height: 72px; padding: 3px; }
+  .hero-photo-tag  { font-size: 11px; padding: 4px 12px; }
+}
 /* ── About ── */
 .about-text {
   font-size: clamp(16px, 0.8vw + 13px, 19px); line-height: 1.8; color: var(--fg2); max-width: 860px;
