@@ -98,7 +98,7 @@ jobs:
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
 
-      - name: Deploy to VM
+      - name: Update JSON in running container
         if: steps.commit.outputs.changed == 'true'
         uses: appleboy/ssh-action@v0.1.6
         with:
@@ -108,7 +108,4 @@ jobs:
           script: |
             cd $HOME/portfoliowebsite
             git pull
-            docker stop portfolio || true
-            docker rm portfolio || true
-            docker build -t portfolio-app .
-            docker run -d -p 8080:80 --restart always --name portfolio portfolio-app
+            docker cp medium-posts.json portfolio:/usr/share/nginx/html/medium-posts.json
