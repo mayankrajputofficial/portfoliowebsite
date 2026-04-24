@@ -85,17 +85,30 @@ jobs:
           PYEOF
 
       - name: Commit and push if changed
+        id: commit
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-
           git add medium-posts.json
-
-          # Only commit if there are actual changes
           if git diff --staged --quiet; then
-            echo "No changes to medium-posts.json — skipping commit"
+            echo "changed=false" >> $GITHUB_OUTPUT
           else
-            git commit -m "chore: update Medium posts [skip ci]"
+            git commit -m "chore: update Medium posts"
             git push
-            echo "Pushed updated medium-posts.json"
+            echo "changed=true" >> $GITHUB_OUTPUT
           fi
+
+      - name: Deploy to VM
+        if: steps.commit.outputs.changed == 'true'
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.HOST }}
+          username: ubuntu
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd $HOME/portfoliowebsite
+            git pull
+            docker stop portfolio || true
+            docker rm portfolio || true
+            docker build -t portfolio-app .
+            docker run -d -p 8080:80 --restart always --name portfolio portfolio-app
