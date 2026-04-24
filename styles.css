@@ -162,6 +162,7 @@ section {
 /* ── Hero ── */
 .hero {
   padding: clamp(48px, 7vw, 96px) 0 clamp(48px, 6vw, 80px);
+  /* flex defined in hero-photo block below */
 }
 .hero-eyebrow {
   font-family: var(--mono); font-size: 14px;
@@ -207,6 +208,67 @@ section {
   transition: border-color 0.15s, color 0.15s;
 }
 .social-chip:hover { border-color: var(--fg3); color: var(--fg); }
+
+/* ── Hero photo ── */
+.hero {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(32px, 5vw, 80px);
+  flex-wrap: wrap;
+}
+.hero-photo-wrap {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding-top: clamp(24px, 4vw, 56px);
+}
+.hero-photo-ring {
+  width: clamp(160px, 18vw, 240px);
+  height: clamp(160px, 18vw, 240px);
+  border-radius: 50%;
+  padding: 4px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+  box-shadow: 0 0 0 1px var(--border), 0 8px 32px rgba(37,99,235,0.18);
+  position: relative;
+}
+.hero-photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  /* Subtle vignette to blend edges into the ring */
+  box-shadow: inset 0 0 12px rgba(0,0,0,0.15);
+}
+.hero-photo-tag {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--fg3);
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 14px;
+  white-space: nowrap;
+}
+.hero-photo-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+  animation: pulse 2s infinite;
+}
+@media (max-width: 768px) {
+  .hero { flex-direction: column-reverse; align-items: flex-start; gap: 24px; }
+  .hero-photo-wrap { flex-direction: row; align-items: center; gap: 16px; padding-top: 0; }
+  .hero-photo-ring { width: 80px; height: 80px; }
+  .hero-photo-tag { font-size: 11px; }
+}
 
 /* ── About ── */
 .about-text {

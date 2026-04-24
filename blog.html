@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <style>
-    /* ── Page hero ── */
+    /* ── Blog page hero ── */
     .blog-hero {
       padding: clamp(48px,6vw,80px) clamp(20px,5vw,64px) clamp(32px,4vw,48px);
       border-bottom: 1px solid var(--border);
@@ -24,9 +24,9 @@
       font-size: clamp(36px,5vw,62px); font-weight: 800;
       letter-spacing: -1.5px; line-height: 1.05; color: var(--fg); margin-bottom: 14px;
     }
-    .blog-hero p { font-size: 18px; color: var(--fg2); max-width: 560px; line-height: 1.7; }
+    .blog-hero p { font-size: 18px; color: var(--fg2); max-width: 540px; line-height: 1.7; }
 
-    /* ── Shared section wrapper ── */
+    /* ── Section wrapper ── */
     .blog-section {
       max-width: 1200px; margin: 0 auto;
       padding: clamp(40px,5vw,60px) clamp(20px,5vw,64px) 0;
@@ -35,46 +35,33 @@
 
     .blog-section-header {
       display: flex; align-items: baseline; gap: 14px;
-      margin-bottom: 28px;
-      padding-bottom: 16px;
+      margin-bottom: 28px; padding-bottom: 16px;
       border-bottom: 1px solid var(--border);
     }
     .blog-section-title {
-      font-size: clamp(18px,2vw,22px); font-weight: 700; letter-spacing: -0.3px;
-      color: var(--fg);
-      padding-left: 14px;
-      border-left: 3px solid var(--accent);
+      font-size: clamp(18px,2vw,22px); font-weight: 700; letter-spacing: -0.3px; color: var(--fg);
+      padding-left: 14px; border-left: 3px solid var(--accent);
     }
-    .blog-section-meta {
-      font-family: var(--mono); font-size: 12px; color: var(--fg3);
-    }
+    .blog-section-meta { font-family: var(--mono); font-size: 12px; color: var(--fg3); }
     .blog-section-link {
-      margin-left: auto;
-      font-family: var(--mono); font-size: 13px;
-      color: var(--fg3); text-decoration: none;
-      transition: color 0.15s;
+      margin-left: auto; font-family: var(--mono); font-size: 13px;
+      color: var(--fg3); text-decoration: none; transition: color 0.15s;
     }
     .blog-section-link:hover { color: var(--accent); }
 
-    /* ── Post list rows ── */
+    /* ── Post list ── */
     .post-list { display: flex; flex-direction: column; }
 
     .post-item {
-      display: flex; align-items: baseline;
-      gap: clamp(12px, 3vw, 40px);
-      padding: 20px 0;
-      border-bottom: 1px solid var(--border);
-      text-decoration: none; color: inherit;
-      position: relative;
+      display: flex; align-items: baseline; gap: clamp(12px,3vw,40px);
+      padding: 20px 0; border-bottom: 1px solid var(--border);
+      text-decoration: none; color: inherit; position: relative;
       transition: padding-left 0.2s ease;
     }
     .post-item::before {
-      content: '';
-      position: absolute; left: -4px; top: 0; bottom: 0; width: 3px;
-      background: var(--accent);
-      transform: scaleY(0); transform-origin: center;
-      transition: transform 0.2s ease;
-      border-radius: 2px;
+      content: ''; position: absolute; left: -4px; top: 0; bottom: 0; width: 3px;
+      background: var(--accent); transform: scaleY(0); transform-origin: center;
+      transition: transform 0.2s ease; border-radius: 2px;
     }
     .post-item:first-child { border-top: 1px solid var(--border); }
     .post-item:hover { padding-left: 12px; }
@@ -86,21 +73,18 @@
     }
     .post-title-wrap { flex: 1; min-width: 0; }
     .post-title {
-      font-size: clamp(15px, 1.2vw + 12px, 18px);
-      font-weight: 600; color: var(--fg); line-height: 1.35;
-      margin-bottom: 5px; transition: color 0.15s;
-      /* Prevent overflow on long titles */
-      overflow: hidden; text-overflow: ellipsis;
+      font-size: clamp(15px,1.2vw + 12px,18px); font-weight: 600;
+      color: var(--fg); line-height: 1.35; margin-bottom: 5px;
+      transition: color 0.15s;
     }
     .post-item:hover .post-title { color: var(--accent); }
-    .post-desc {
-      font-size: 14px; color: var(--fg3); line-height: 1.5;
-      margin-bottom: 7px;
+    .post-excerpt {
+      font-size: 13px; color: var(--fg3); line-height: 1.5; margin-bottom: 7px;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
     }
     .post-tags { display: flex; gap: 6px; flex-wrap: wrap; }
     .post-tag {
-      font-family: var(--mono); font-size: 11px;
-      padding: 3px 9px; border-radius: 4px;
+      font-family: var(--mono); font-size: 11px; padding: 3px 9px; border-radius: 4px;
       background: var(--bg2); color: var(--fg3); border: 1px solid var(--border);
     }
     .post-badge {
@@ -108,70 +92,56 @@
       padding: 3px 8px; border-radius: 4px; letter-spacing: 0.05em;
       flex-shrink: 0; align-self: center;
     }
-    .post-badge--site {
-      background: var(--btn-bg); color: var(--btn-text);
-    }
-    .post-badge--medium {
-      background: transparent; color: var(--fg3);
-      border: 1px solid var(--border);
-    }
+    .post-badge--site   { background: var(--btn-bg); color: var(--btn-text); }
+    .post-badge--medium { background: transparent; color: var(--fg3); border: 1px solid var(--border); }
     .post-arrow {
       font-size: 16px; color: var(--fg3); flex-shrink: 0; align-self: center;
       transition: color 0.15s, transform 0.2s;
     }
     .post-item:hover .post-arrow { color: var(--accent); transform: translateX(5px); }
 
-    /* ── Medium loading / error / empty states ── */
-    .feed-state {
-      padding: 36px 0;
+    /* ── States ── */
+    .feed-loading {
+      display: flex; align-items: center; gap: 12px; padding: 36px 0;
       font-family: var(--mono); font-size: 13px; color: var(--fg3);
-      display: flex; align-items: center; gap: 12px;
     }
-    .feed-state-dot {
+    .feed-loading-dot {
       width: 7px; height: 7px; border-radius: 50%;
-      background: var(--accent); flex-shrink: 0;
-      animation: pulse 1s infinite;
+      background: var(--accent); flex-shrink: 0; animation: pulse 1s infinite;
     }
-    .feed-state a { color: var(--accent); }
 
     .feed-empty-box {
       background: var(--white); border: 1.5px solid var(--border);
-      border-radius: 12px; padding: 40px;
-      display: flex; align-items: flex-start; gap: 20px;
+      border-radius: 12px; padding: 40px; display: flex; align-items: flex-start; gap: 20px;
     }
     .feed-empty-icon { font-size: 28px; flex-shrink: 0; opacity: 0.4; }
     .feed-empty-body h3 { font-size: 17px; font-weight: 700; color: var(--fg); margin-bottom: 6px; }
     .feed-empty-body p  { font-size: 14px; color: var(--fg2); line-height: 1.65; margin-bottom: 14px; }
     .feed-empty-body a {
-      font-family: var(--mono); font-size: 13px;
-      color: var(--btn-text); background: var(--btn-bg);
-      padding: 8px 18px; border-radius: 7px; text-decoration: none;
-      transition: opacity 0.15s; display: inline-block;
+      font-family: var(--mono); font-size: 13px; color: var(--btn-text);
+      background: var(--btn-bg); padding: 8px 18px; border-radius: 7px;
+      text-decoration: none; transition: opacity 0.15s; display: inline-block;
     }
     .feed-empty-body a:hover { opacity: 0.85; }
 
-    /* Divider between sections */
-    .section-divider {
-      max-width: 1200px; margin: 0 auto;
-      padding: 0 clamp(20px,5vw,64px);
-    }
-    .section-divider hr {
-      border: none; border-top: 1px solid var(--border);
-      margin: clamp(40px,5vw,60px) 0 0;
+    /* Last-fetched timestamp */
+    .feed-timestamp {
+      font-family: var(--mono); font-size: 11px; color: var(--fg3);
+      margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border);
     }
 
+    .section-divider { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px,5vw,64px); }
+    .section-divider hr { border: none; border-top: 1px solid var(--border); margin: clamp(40px,5vw,60px) 0 0; }
+
     @media (max-width: 600px) {
-      .post-item       { flex-wrap: wrap; gap: 6px; }
-      .post-arrow      { display: none; }
-      .post-date       { min-width: auto; }
-      .post-badge      { display: none; }
-      .feed-empty-box  { flex-direction: column; }
+      .post-item { flex-wrap: wrap; gap: 6px; }
+      .post-arrow, .post-badge { display: none; }
+      .post-date { min-width: auto; }
     }
   </style>
 </head>
 <body>
 
-<!-- Nav -->
 <nav class="page-nav" aria-label="Main navigation">
   <a href="/" class="nav-logo-small">Mayank Rajput</a>
   <a href="/">Home</a>
@@ -185,7 +155,7 @@
   <div class="blog-hero-inner">
     <div class="blog-eyebrow">Writing</div>
     <h1>Everything I learn,<br>written down.</h1>
-    <p>Technical deep-dives on DevOps and infrastructure — plus whatever else I'm thinking about on Medium.</p>
+    <p>Technical DevOps deep-dives on this site. Everything else — thoughts, observations, other tech — on Medium.</p>
   </div>
 </div>
 
@@ -199,18 +169,18 @@
     <span class="blog-section-meta">hosted here</span>
   </div>
 
-  <div class="post-list" id="site-posts">
+  <div class="post-list">
 
     <a href="/posts/nginx-debug.html" class="post-item">
       <div class="post-date">Apr 2026</div>
       <div class="post-title-wrap">
         <div class="post-title">Debugging Nginx 504 Gateway Timeout on Oracle Cloud</div>
-        <div class="post-desc">Packets arriving at the VM but nothing coming back — a full walkthrough from Docker to iptables.</div>
+        <div class="post-excerpt">Packets arriving at the VM but nothing coming back — a full walkthrough from Docker to iptables, using tcpdump to pinpoint exactly where traffic was being dropped.</div>
         <div class="post-tags">
           <span class="post-tag">Nginx</span>
           <span class="post-tag">Docker</span>
           <span class="post-tag">OCI</span>
-          <span class="post-tag">Networking</span>
+          <span class="post-tag">iptables</span>
         </div>
       </div>
       <span class="post-badge post-badge--site">on-site</span>
@@ -221,7 +191,7 @@
       <div class="post-date">Apr 2026</div>
       <div class="post-title-wrap">
         <div class="post-title">Understanding iptables Through a Real Issue</div>
-        <div class="post-desc">How a default REJECT rule silently dropped all port 80 traffic, and why rule order is everything.</div>
+        <div class="post-excerpt">A default REJECT rule silently blocked all port 80 traffic. Here's how iptables chains work, why rule order matters, and why -I and -A produce completely different outcomes.</div>
         <div class="post-tags">
           <span class="post-tag">Linux</span>
           <span class="post-tag">iptables</span>
@@ -241,21 +211,21 @@
 
 
 <!-- ══════════════════════════════════════════
-     SECTION 2 — Medium posts (fetched live)
+     SECTION 2 — Medium posts (local JSON)
      ══════════════════════════════════════════ -->
 <div class="blog-section">
   <div class="blog-section-header">
     <h2 class="blog-section-title">On Medium</h2>
-    <span class="blog-section-meta">fetched live</span>
+    <span class="blog-section-meta">auto-updated every 6 hours</span>
     <a href="https://medium.com/@mayankrajputofficial" target="_blank" rel="noopener noreferrer" class="blog-section-link">
       Follow on Medium &rarr;
     </a>
   </div>
 
   <div id="medium-feed">
-    <div class="feed-state" id="medium-status">
-      <div class="feed-state-dot"></div>
-      Fetching from Medium…
+    <div class="feed-loading" id="medium-loading">
+      <div class="feed-loading-dot"></div>
+      Loading posts…
     </div>
   </div>
 </div>
@@ -271,8 +241,9 @@
 </footer>
 
 <script>
-/* ── Year & Theme ── */
 document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+// ── Theme ──────────────────────────────────────────────────────────────────
 (function() {
   var saved = localStorage.getItem('theme') || 'dark';
   document.documentElement.setAttribute('data-theme', saved);
@@ -292,41 +263,61 @@ document.getElementById('currentYear').textContent = new Date().getFullYear();
   });
 })();
 
-/* ── Medium RSS fetch with dual-proxy fallback ──
-   Proxy 1: rss2json.com  (fast, popular)
-   Proxy 2: allorigins    (plain-text CORS proxy, we parse XML ourselves)
-   If both fail: show friendly fallback with direct Medium link.
-*/
+// ── Medium posts from local JSON file ─────────────────────────────────────
+// This file is generated by GitHub Actions (.github/workflows/fetch-medium.yml)
+// It runs every 6 hours, fetches the Medium RSS server-side (no CORS issue),
+// and commits medium-posts.json back to the repo. The deploy pipeline picks
+// it up and serves it as a static file — 100% reliable, no external API call.
 (async function() {
+  var container = document.getElementById('medium-feed');
   var MEDIUM_USER = 'mayankrajputofficial';
-  var RSS_URL     = 'https://medium.com/feed/@' + MEDIUM_USER;
-  var feed        = document.getElementById('medium-feed');
 
   function escHtml(s) {
-    return String(s)
+    return String(s || '')
       .replace(/&/g,'&amp;').replace(/</g,'&lt;')
       .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  function fmtDate(s) {
-    var d = new Date(s);
-    if (isNaN(d)) return '';
-    return d.toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+  function renderEmpty(fetchedAt) {
+    var ago = fetchedAt ? ' (last checked: ' + fetchedAt + ')' : '';
+    container.innerHTML =
+      '<div class="feed-empty-box">' +
+        '<div class="feed-empty-icon">✍️</div>' +
+        '<div class="feed-empty-body">' +
+          '<h3>No Medium posts yet</h3>' +
+          '<p>I\'m writing my first article right now. Follow on Medium to get notified when it goes live.</p>' +
+          '<a href="https://medium.com/@' + MEDIUM_USER + '" target="_blank" rel="noopener noreferrer">Follow on Medium &rarr;</a>' +
+        '</div>' +
+      '</div>' +
+      (ago ? '<div class="feed-timestamp">Feed ' + ago + '</div>' : '');
   }
 
-  function renderPosts(items) {
-    if (!items || items.length === 0) { renderEmpty(); return; }
+  function renderError() {
+    container.innerHTML =
+      '<div class="feed-empty-box">' +
+        '<div class="feed-empty-icon">⚠️</div>' +
+        '<div class="feed-empty-body">' +
+          '<h3>Could not load posts</h3>' +
+          '<p>Read articles directly on Medium.</p>' +
+          '<a href="https://medium.com/@' + MEDIUM_USER + '" target="_blank" rel="noopener noreferrer">Open Medium &rarr;</a>' +
+        '</div>' +
+      '</div>';
+  }
+
+  function renderPosts(posts, fetchedAt) {
+    if (!posts || posts.length === 0) { renderEmpty(fetchedAt); return; }
+
     var html = '<div class="post-list">';
-    items.forEach(function(item) {
-      var tags = (item.categories || item.tags || []).slice(0, 4);
-      var tagsHtml = tags.map(function(t) {
+    posts.forEach(function(post) {
+      var tagsHtml = (post.tags || []).map(function(t) {
         return '<span class="post-tag">' + escHtml(t) + '</span>';
       }).join('');
       html +=
-        '<a href="' + escHtml(item.url) + '" target="_blank" rel="noopener noreferrer" class="post-item">' +
-          '<div class="post-date">' + fmtDate(item.date) + '</div>' +
+        '<a href="' + escHtml(post.url) + '" target="_blank" rel="noopener noreferrer" class="post-item">' +
+          '<div class="post-date">' + escHtml(post.date) + '</div>' +
           '<div class="post-title-wrap">' +
-            '<div class="post-title">' + escHtml(item.title) + '</div>' +
+            '<div class="post-title">' + escHtml(post.title) + '</div>' +
+            (post.excerpt ? '<div class="post-excerpt">' + escHtml(post.excerpt) + '</div>' : '') +
             (tagsHtml ? '<div class="post-tags">' + tagsHtml + '</div>' : '') +
           '</div>' +
           '<span class="post-badge post-badge--medium">medium</span>' +
@@ -334,76 +325,26 @@ document.getElementById('currentYear').textContent = new Date().getFullYear();
         '</a>';
     });
     html += '</div>';
-    feed.innerHTML = html;
-  }
 
-  function renderEmpty() {
-    feed.innerHTML =
-      '<div class="feed-empty-box">' +
-        '<div class="feed-empty-icon">✍️</div>' +
-        '<div class="feed-empty-body">' +
-          '<h3>No Medium posts yet</h3>' +
-          '<p>I\'m writing my first article. Follow me on Medium to get notified when it goes live.</p>' +
-          '<a href="https://medium.com/@' + MEDIUM_USER + '" target="_blank" rel="noopener noreferrer">Follow on Medium &rarr;</a>' +
-        '</div>' +
-      '</div>';
-  }
-
-  function renderError() {
-    feed.innerHTML =
-      '<div class="feed-state">' +
-        'Could not load Medium posts right now — ' +
-        '<a href="https://medium.com/@' + MEDIUM_USER + '" target="_blank" rel="noopener noreferrer">&nbsp;read them directly on Medium &rarr;</a>' +
-      '</div>';
-  }
-
-  /* ── Proxy 1: rss2json.com ── */
-  async function tryRss2Json() {
-    var url = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(RSS_URL) + '&count=20';
-    var res  = await fetch(url);
-    if (!res.ok) throw new Error('rss2json HTTP ' + res.status);
-    var data = await res.json();
-    if (data.status !== 'ok') throw new Error('rss2json status: ' + data.status);
-    /* Map rss2json shape → our shape */
-    return (data.items || []).map(function(i) {
-      return { title: i.title, url: i.link, date: i.pubDate, categories: i.categories };
-    });
-  }
-
-  /* ── Proxy 2: allorigins (CORS proxy → parse raw XML) ── */
-  async function tryAllOrigins() {
-    var url  = 'https://api.allorigins.win/get?url=' + encodeURIComponent(RSS_URL);
-    var res  = await fetch(url);
-    if (!res.ok) throw new Error('allorigins HTTP ' + res.status);
-    var json = await res.json();
-    var xml  = json.contents;
-    if (!xml) throw new Error('allorigins empty');
-    var parser = new DOMParser();
-    var doc    = parser.parseFromString(xml, 'text/xml');
-    var items  = Array.from(doc.querySelectorAll('item'));
-    if (items.length === 0) return []; /* feed exists but no posts yet */
-    return items.map(function(el) {
-      var cats = Array.from(el.querySelectorAll('category')).map(function(c) { return c.textContent; });
-      return {
-        title: el.querySelector('title') ? el.querySelector('title').textContent : '',
-        url:   el.querySelector('link')  ? el.querySelector('link').textContent  : '',
-        date:  el.querySelector('pubDate') ? el.querySelector('pubDate').textContent : '',
-        categories: cats
-      };
-    });
-  }
-
-  /* ── Main fetch logic ── */
-  try {
-    var items = await tryRss2Json();
-    renderPosts(items);
-  } catch (e1) {
-    try {
-      var items2 = await tryAllOrigins();
-      renderPosts(items2);
-    } catch (e2) {
-      renderError();
+    // Show last-fetched timestamp at the bottom
+    if (fetchedAt) {
+      var d = new Date(fetchedAt);
+      var fmt = d.toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
+      html += '<div class="feed-timestamp">Last synced from Medium: ' + fmt + ' UTC</div>';
     }
+
+    container.innerHTML = html;
+  }
+
+  try {
+    // Fetch the local JSON file — served as a static file by Nginx
+    // This file is auto-updated by GitHub Actions every 6 hours
+    var res = await fetch('/medium-posts.json?v=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    var data = await res.json();
+    renderPosts(data.posts, data.fetchedAt);
+  } catch(e) {
+    renderError();
   }
 })();
 </script>

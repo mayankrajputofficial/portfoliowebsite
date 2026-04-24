@@ -1,0 +1,101 @@
+name: Fetch Medium Posts
+
+on:
+  schedule:
+    # Every 6 hours: at 00:00, 06:00, 12:00, 18:00 UTC
+    - cron: '0 */6 * * *'
+  # Also allow manual trigger from GitHub Actions UI
+  workflow_dispatch:
+
+jobs:
+  fetch-medium:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # needed to commit the JSON file back to the repo
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fetch Medium RSS and save as JSON
+        run: |
+          # Fetch the RSS feed directly — no CORS issues server-side
+          RSS_URL="https://medium.com/feed/@mayankrajputofficial"
+
+          echo "Fetching RSS feed from Medium..."
+          curl -fsSL "$RSS_URL" -o medium-feed.xml
+
+          echo "Parsing XML and generating JSON..."
+          python3 << 'PYEOF'
+          import xml.etree.ElementTree as ET
+          import json, re
+          from datetime import datetime
+
+          tree = ET.parse('medium-feed.xml')
+          root = tree.getroot()
+
+          # Medium RSS uses standard RSS 2.0 with some Dublin Core extensions
+          ns = {
+              'dc': 'http://purl.org/dc/elements/1.1/',
+              'content': 'http://purl.org/rss/1.0/modules/content/',
+          }
+
+          items = []
+          for item in root.findall('.//item'):
+              title = item.findtext('title', '').strip()
+              link  = item.findtext('link', '').strip()
+              pub   = item.findtext('pubDate', '').strip()
+              desc  = item.findtext('description', '').strip()
+
+              # Categories (Medium tags)
+              cats = [c.text.strip() for c in item.findall('category') if c.text]
+
+              # Strip HTML from description for a clean excerpt
+              excerpt = re.sub(r'<[^>]+>', '', desc)[:200].strip()
+
+              # Format date nicely
+              try:
+                  dt = datetime.strptime(pub[:25].strip(), '%a, %d %b %Y %H:%M:%S')
+                  formatted = dt.strftime('%-d %b %Y')
+              except Exception:
+                  formatted = pub[:16]
+
+              if title and link:
+                  items.append({
+                      'title':    title,
+                      'url':      link,
+                      'date':     formatted,
+                      'rawDate':  pub,
+                      'excerpt':  excerpt,
+                      'tags':     cats[:4],
+                  })
+
+          output = {
+              'fetchedAt': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
+              'count':     len(items),
+              'posts':     items,
+          }
+
+          with open('medium-posts.json', 'w') as f:
+              json.dump(output, f, indent=2, ensure_ascii=False)
+
+          print(f"Saved {len(items)} posts to medium-posts.json")
+          PYEOF
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add medium-posts.json
+
+          # Only commit if there are actual changes
+          if git diff --staged --quiet; then
+            echo "No changes to medium-posts.json — skipping commit"
+          else
+            git commit -m "chore: update Medium posts [skip ci]"
+            git push
+            echo "Pushed updated medium-posts.json"
+          fi
