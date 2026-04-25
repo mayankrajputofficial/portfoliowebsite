@@ -160,7 +160,6 @@ section {
 #about, #contact { background: var(--bg2); }
 
 /* ── Hero ── */
-/* hero padding & grid defined in hero-photo block below */
 .hero-eyebrow {
   font-family: var(--mono); font-size: 14px;
   color: var(--accent); letter-spacing: 0.1em;
@@ -663,32 +662,6 @@ footer a:hover { color: var(--accent); }
   .contact-layout { gap: 40px; }
 }
 
-/* ── Mobile ── */
-@media (max-width: 768px) {
-  nav { height: 56px; }
-  .nav-links { display: none; }
-  .nav-cta { display: none; }
-  .nav-logo span { display: none; }
-  .nav-logo { font-size: 17px; }
-  .theme-toggle { width: 34px; height: 34px; font-size: 16px; margin-right: 4px; }
-  .nav-hamburger { display: flex; }
-
-  .ofw-strip { font-size: 12px; }
-
-  .hero-name { letter-spacing: -1px; }
-  .hero-desc { font-size: 17px; }
-
-  .blog-cta-inner { flex-direction: column; gap: 32px; }
-  .blog-cards { min-width: 0 !important; width: 100%; }
-
-  .contact-layout { grid-template-columns: 1fr; gap: 32px; }
-
-  footer { flex-direction: column; align-items: flex-start; gap: 8px; }
-
-  .blog-list-item { flex-direction: column; gap: 12px; }
-  .blog-list-arrow { display: none; }
-}
-
 /* ══════════════════════════════════════════════════
    MODE TOGGLE PILL
    ══════════════════════════════════════════════════ */
@@ -697,9 +670,6 @@ footer a:hover { color: var(--accent); }
   background: var(--bg2); border: 1.5px solid var(--border);
   border-radius: 20px; padding: 3px; gap: 2px;
   flex-shrink: 0; z-index: 2;
-  position: relative !important;
-  left: auto !important;
-  transform: none !important;
 }
 .mode-btn {
   font-family: var(--mono); font-size: 11px; font-weight: 700;
@@ -714,48 +684,36 @@ footer a:hover { color: var(--accent); }
 .mode-btn:not(.active):hover { color: var(--fg); }
 
 /* ══════════════════════════════════════════════════
-   NAV — BULLETPROOF FLEX LAYOUT (Fixes Desktop & Mobile)
+   NAV — 3-COLUMN GRID: links | TOGGLE-CENTER | right
    ══════════════════════════════════════════════════ */
 nav {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  gap: 16px;
+  display: grid !important;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-areas: "left center right";
+  align-items: center;
   height: 64px;
   padding: 0 clamp(16px,5vw,64px);
+  gap: 0;
 }
 
-.nav-left, .nav-right {
-  flex: 1; /* Makes left and right sides equal, perfectly centering the pill */
-  min-width: 0; /* Prevents contents from pushing out of bounds */
-}
-
-.nav-left {
-  display: flex;
-  align-items: center;
-}
-
-.nav-right {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 8px;
-}
-
-/* Make the logo shrink gracefully with "..." if things get too tight */
+/* Logo sits inside left area, links follow it */
 .nav-logo {
+  flex-shrink: 0;
   margin-right: 16px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: block;
-  /* CRITICAL FIX: flex-shrink: 0; has been completely removed */
 }
 
-/* Links wrapper — takes remaining right space */
+/* Left group: logo + links wrapper */
+.nav-left {
+  grid-area: left;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+/* Links wrapper — pushes right */
 .nav-links-wrapper {
   display: flex !important;
-  justify-content: flex-end; /* Changed from flex-start */
+  justify-content: flex-end; 
   position: relative;
   height: 40px;
   overflow: hidden;
@@ -804,6 +762,19 @@ nav {
 .nav-links-work a:hover,
 .nav-links-life a:hover { color: var(--fg); background: var(--bg2); }
 
+/* Toggle — dead centre */
+.mode-pill {
+  grid-area: center;
+  justify-self: center;
+}
+
+/* Right group: theme + CTA + hamburger */
+.nav-right {
+  grid-area: right;
+  display: flex; align-items: center; gap: 8px;
+  justify-content: flex-end;
+}
+
 /* OFW strip — animated between modes */
 .ofw-strip {
   transition: opacity 0.4s, transform 0.4s;
@@ -846,9 +817,9 @@ nav {
 
 /* Initial state (set by JS) */
 #work-mode.mode-entering  { animation: slideInFromLeft 0.45s cubic-bezier(0.4,0,0.2,1) forwards; }
-#work-mode.mode-exiting { animation: slideOutToLeft 0.4s cubic-bezier(0.4,0,0.2,1) forwards; }
+#work-mode.mode-exiting   { animation: slideOutToLeft 0.4s cubic-bezier(0.4,0,0.2,1) forwards; }
 #life-mode.mode-entering  { animation: slideInFromRight 0.45s cubic-bezier(0.4,0,0.2,1) forwards; }
-#life-mode.mode-exiting { animation: slideOutToRight 0.4s cubic-bezier(0.4,0,0.2,1) forwards; }
+#life-mode.mode-exiting   { animation: slideOutToRight 0.4s cubic-bezier(0.4,0,0.2,1) forwards; }
 
 @keyframes slideInFromLeft  { from { opacity:0; transform: translateX(-40px); } to { opacity:1; transform: translateX(0); } }
 @keyframes slideInFromRight { from { opacity:0; transform: translateX(40px);  } to { opacity:1; transform: translateX(0); } }
@@ -858,7 +829,7 @@ nav {
 /* Prevents the page from doubling in height during transitions */
 .mode-exiting {
   position: absolute !important;
-  top: 64px; /* Anchors it right below your nav bar */
+  top: 64px; 
   left: 0;
   width: 100%;
   pointer-events: none;
@@ -879,7 +850,7 @@ nav {
   background-color: #0f1117; 
 }
 
-   /* Work mode: network/nodes background */
+/* Work mode: network/nodes background */
 #intro { position: relative; overflow: hidden; }
 #intro .section-inner { position: relative; z-index: 1; }
 #intro::before {
@@ -943,11 +914,7 @@ nav {
 }
 .life-ring {
   background: linear-gradient(135deg, var(--life-accent), var(--life-accent2)) !important;
-  
-  /* The fixed shadow with NO 1px border */
   box-shadow: 0 12px 48px rgba(245,158,11,0.25) !important;
-  
-  /* Force smoothing here too */
   outline: 1px solid transparent !important;
 }
 .life-tag { border-color: rgba(245,158,11,0.3) !important; }
@@ -1106,20 +1073,39 @@ nav {
    ══════════════════════════════════════════════════ */
 @media (max-width: 860px) {
 
-  /* Hide desktop links and buttons */
-  .nav-links-wrapper, .nav-cta-wrapper {
-    display: none !important;
-  }
-
-  /* Show hamburger */
-  .nav-hamburger {
+  /* Switch mobile to Flexbox so elements can size dynamically */
+  nav {
     display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 8px !important;
   }
-
-  /* Hide the long subtext ("— Mayank's World") to free up space on small screens */
-  .nav-logo span {
-    display: none;
+  
+  .nav-left { flex: 0 1 auto; min-width: 0; }
+  
+  /* Hide the long subtext to save space */
+  .nav-logo span { display: none; }
+  
+  /* Allow "Mayank Rajput" to wrap into two lines so it never truncates! */
+  .nav-logo {
+    white-space: normal;
+    line-height: 1.15;
+    font-size: 17px;
+    margin-right: 0;
+    display: block;
   }
+  
+  /* Safely float the pill toward the center */
+  .mode-pill {
+    flex: 0 0 auto;
+    margin: 0 auto;
+  }
+  
+  .nav-right { flex: 0 0 auto; justify-content: flex-end; }
+  
+  /* Hide desktop elements */
+  .nav-links-wrapper, .nav-cta-wrapper { display: none !important; }
+  .nav-hamburger { display: flex !important; }
 
   /* Mobile menu — full-width dropdown */
   .nav-mobile-menu {
