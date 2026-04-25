@@ -942,21 +942,23 @@ nav {
   min-width: 0;
 }
 
-/* Links wrapper — takes remaining left space */
+/* Links wrapper — takes remaining right space */
 .nav-links-wrapper {
   display: flex !important;
-  justify-content: flex-start;
+  justify-content: flex-end; /* Changed from flex-start */
   position: relative;
   height: 40px;
   overflow: hidden;
   align-items: center;
   flex: 1;
+  margin-right: 16px; /* Adds breathing room before the theme toggle */
 }
 
 /* Both link sets positioned absolutely inside wrapper */
 .nav-links-work,
 .nav-links-life {
   position: absolute;
+  right: 0; /* Anchors the links to the right */
   display: flex !important;
   gap: 4px;
   align-items: center;
@@ -1089,7 +1091,7 @@ nav {
   transform: scale(1.04);
   opacity: 0;
   transition: opacity 1.2s ease, transform 8s ease;
-  animation: bgFadeIn 1.4s ease 0.1s forwards;
+  animation: bgFadeIn 3s ease 0.3s forwards;
 }
 #life-intro:hover::before { transform: scale(1.0); }
 @keyframes bgFadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -1107,7 +1109,7 @@ nav {
   background-position: center;
   filter: brightness(0.12) saturate(0.6);
   opacity: 0;
-  animation: bgFadeIn 1.2s ease 0.2s forwards;
+  animation: bgFadeIn 3s ease 0.4s forwards;
 }
 #life-stories .section-inner { position: relative; z-index: 1; }
 
@@ -1351,3 +1353,27 @@ nav {
   .stories-grid { grid-template-columns: 1fr; }
   .hobbies-grid { grid-template-columns: 1fr 1fr; }
 }
+
+/* ══════════════════════════════════════════════════
+   FIX DISAPPEARING TEXT ON DARK IMAGE BACKGROUNDS
+   ══════════════════════════════════════════════════ */
+/* Forces light text in Hero sections because the background images are permanently dark */
+.hero-section .hero-name:not(.life-name) { color: #ffffff !important; }
+.hero-section .hero-desc { color: rgba(255, 255, 255, 0.85) !important; }
+.hero-section .hero-desc strong { color: #ffffff !important; }
+.hero-section .btn-secondary { color: #ffffff !important; border-color: rgba(255, 255, 255, 0.3) !important; }
+.hero-section .btn-secondary:hover { background: rgba(255, 255, 255, 0.1) !important; border-color: #ffffff !important; }
+.hero-section .social-chip { color: rgba(255, 255, 255, 0.7) !important; border-color: rgba(255, 255, 255, 0.2) !important; }
+.hero-section .social-chip:hover { color: #ffffff !important; border-color: rgba(255, 255, 255, 0.6) !important; }
+
+/* Keep the photo tags readable */
+.hero-section .hero-photo-tag {
+  background: rgba(15, 17, 23, 0.7) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Life stories section also has a permanent dark background image */
+#life-stories .section-title { color: #ffffff !important; }
+#life-stories .about-text { color: rgba(255, 255, 255, 0.85) !important; }
+#life-stories .section-count { color: rgba(255, 255, 255, 0.6) !important; }

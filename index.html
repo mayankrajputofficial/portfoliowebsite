@@ -17,9 +17,16 @@
 
 <!-- ── Nav ── -->
 <nav aria-label="Main navigation">
-  <!-- Left: logo + nav links -->
   <div class="nav-left">
     <a href="#intro" class="nav-logo" id="nav-logo">Mayank Rajput<span id="nav-logo-sub"> — DevOps Engineer</span></a>
+  </div>
+
+  <div class="mode-pill" id="mode-pill" role="group" aria-label="Switch site mode">
+    <button class="mode-btn mode-work active" id="mode-work-btn" aria-pressed="true">⚙ Work</button>
+    <button class="mode-btn mode-life" id="mode-life-btn" aria-pressed="false">✦ Life</button>
+  </div>
+
+  <div class="nav-right">
     <div class="nav-links-wrapper">
       <div class="nav-links nav-links-work" id="nav-links-work">
         <a href="#about">About</a>
@@ -36,16 +43,6 @@
         <a href="#life-connect">Connect</a>
       </div>
     </div>
-  </div>
-
-  <!-- Centre: mode toggle pill -->
-  <div class="mode-pill" id="mode-pill" role="group" aria-label="Switch site mode">
-    <button class="mode-btn mode-work active" id="mode-work-btn" aria-pressed="true">⚙ Work</button>
-    <button class="mode-btn mode-life" id="mode-life-btn" aria-pressed="false">✦ Life</button>
-  </div>
-
-  <!-- Right: theme + CTA + hamburger -->
-  <div class="nav-right">
     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">☀</button>
     <div class="nav-cta-wrapper">
       <a href="#contact" class="nav-cta nav-cta-work" id="nav-cta-work">Hire me &rarr;</a>
