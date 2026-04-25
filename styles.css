@@ -742,14 +742,14 @@ nav {
   gap: 8px;
 }
 
-/* Logo sits inside left area, links follow it */
+/* Make the logo shrink gracefully with "..." if things get too tight */
 .nav-logo {
-  flex-shrink: 0;
   margin-right: 16px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   display: block;
+  /* CRITICAL FIX: flex-shrink: 0; has been completely removed */
 }
 
 /* Links wrapper — takes remaining right space */
