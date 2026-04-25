@@ -18,32 +18,41 @@
 <!-- ── Nav ── -->
 <nav aria-label="Main navigation">
   <a href="#intro" class="nav-logo" id="nav-logo">Mayank Rajput<span id="nav-logo-sub"> — DevOps Engineer</span></a>
-  <div class="nav-links" id="nav-links-work">
-    <a href="#about">About</a>
-    <a href="#stack">Stack</a>
-    <a href="#projects">Projects</a>
-    <a href="#blog">Blog</a>
-    <a href="#contact">Contact</a>
-  </div>
-  <div class="nav-links" id="nav-links-life" style="display:none">
-    <a href="#life-about">About</a>
-    <a href="#life-hobbies">Interests</a>
-    <a href="#life-stories">Stories</a>
-    <a href="#life-blog">Writing</a>
-    <a href="#life-connect">Connect</a>
+
+  <!-- Nav links wrapper — both sets stacked, animated -->
+  <div class="nav-links-wrapper">
+    <div class="nav-links nav-links-work" id="nav-links-work">
+      <a href="#about">About</a>
+      <a href="#stack">Stack</a>
+      <a href="#projects">Projects</a>
+      <a href="#blog">Blog</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-links nav-links-life" id="nav-links-life">
+      <a href="#life-about">About</a>
+      <a href="#life-hobbies">Interests</a>
+      <a href="#life-stories">Stories</a>
+      <a href="#life-blog">Writing</a>
+      <a href="#life-connect">Connect</a>
+    </div>
   </div>
 
-  <!-- Mode toggle pill -->
+  <!-- Mode toggle pill — always centred -->
   <div class="mode-pill" id="mode-pill" role="group" aria-label="Switch site mode">
     <button class="mode-btn mode-work active" id="mode-work-btn" aria-pressed="true">⚙ Work</button>
     <button class="mode-btn mode-life" id="mode-life-btn" aria-pressed="false">✦ Life</button>
   </div>
 
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">☀</button>
-  <a href="#contact" class="nav-cta" id="nav-cta">Hire me &rarr;</a>
-  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile-menu">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="nav-right">
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">☀</button>
+    <div class="nav-cta-wrapper">
+      <a href="#contact" class="nav-cta nav-cta-work" id="nav-cta-work">Hire me &rarr;</a>
+      <a href="#life-connect" class="nav-cta nav-cta-life" id="nav-cta-life">Find me &rarr;</a>
+    </div>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
 <!-- Mobile nav -->
@@ -56,12 +65,13 @@
     <a href="#contact">Contact</a>
     <a href="#contact" class="mobile-cta">Hire me &rarr;</a>
   </div>
-  <div id="mobile-life-links" style="display:none">
+  <div id="mobile-life-links">
     <a href="#life-about">About</a>
     <a href="#life-hobbies">Interests</a>
     <a href="#life-stories">Stories</a>
     <a href="#life-blog">Writing</a>
     <a href="#life-connect">Connect</a>
+    <a href="#life-connect" class="mobile-cta" style="background:var(--life-accent);color:#000;">Find me &rarr;</a>
   </div>
 </div>
 
@@ -75,7 +85,7 @@
     Open to DevOps &amp; Cloud roles &middot; Remote or India-based
   </div>
 
-  <section id="intro" style="border-top:none; padding-bottom:56px;">
+  <section id="intro" class="hero-section hero-section-work" style="border-top:none; padding-bottom:56px;">
     <div class="section-inner" id="main-content">
       <div class="hero">
         <div class="hero-content">
@@ -271,8 +281,14 @@
      ══════════════════════════════════════════════════ -->
 <div id="life-mode" style="display:none">
 
+  <!-- Life tagline strip -->
+  <div class="ofw-strip life-strip" role="banner">
+    <div class="ofw-dot life-ofw-dot"></div>
+    Fitness &middot; Travel &middot; Photography &middot; Bikes &middot; Tech &middot; Life
+  </div>
+
   <!-- Life hero -->
-  <section id="life-intro" style="border-top:none; padding-bottom:56px;">
+  <section id="life-intro" class="hero-section hero-section-life" style="border-top:none; padding-bottom:56px;">
     <div class="section-inner">
       <div class="hero">
         <div class="hero-content">
@@ -497,66 +513,85 @@ document.addEventListener('DOMContentLoaded', function() {
   var lifeBtn  = document.getElementById('mode-life-btn');
   var workDiv  = document.getElementById('work-mode');
   var lifeDiv  = document.getElementById('life-mode');
-  var navCta   = document.getElementById('nav-cta');
   var navSub   = document.getElementById('nav-logo-sub');
-  var navW     = document.getElementById('nav-links-work');
-  var navL     = document.getElementById('nav-links-life');
+  var navL     = document.getElementById('nav-links-life'); /* kept for ref */
   var mobileW  = document.getElementById('mobile-work-links');
   var mobileL  = document.getElementById('mobile-life-links');
   var footerW  = document.getElementById('footer-work-links');
   var footerL  = document.getElementById('footer-life-links');
 
-  function setMode(mode) {
+  function setMode(mode, animate) {
     var isLife = mode === 'life';
+    var prev   = document.documentElement.getAttribute('data-mode');
+    if (animate && prev === mode) return;
+
     document.documentElement.setAttribute('data-mode', mode);
     localStorage.setItem('siteMode', mode);
 
-    workDiv.style.display  = isLife ? 'none' : 'block';
-    lifeDiv.style.display  = isLife ? 'block' : 'none';
-    navW.style.display     = isLife ? 'none' : 'flex';
-    navL.style.display     = isLife ? 'flex' : 'none';
-    mobileW.style.display  = isLife ? 'none' : 'block';
-    mobileL.style.display  = isLife ? 'block' : 'none';
-    navCta.style.display   = isLife ? 'none' : '';
-    navSub.textContent     = isLife ? ' — Mayank\'s World' : ' — DevOps Engineer';
-    footerW.style.display  = isLife ? 'none' : '';
-    footerL.style.display  = isLife ? '' : 'none';
+    /* ── Slide animation ── */
+    if (animate) {
+      var outEl = isLife ? workDiv : lifeDiv;
+      var inEl  = isLife ? lifeDiv : workDiv;
+      outEl.style.display = 'block';
+      inEl.style.display  = 'block';
+      outEl.classList.remove('mode-entering');
+      inEl.classList.remove('mode-entering');
+      void outEl.offsetWidth; // force reflow
+      outEl.classList.add(isLife ? 'mode-exiting' : 'mode-exiting');
+      inEl.classList.add('mode-entering');
+      setTimeout(function() {
+        outEl.style.display = 'none';
+        outEl.classList.remove('mode-exiting');
+      }, 420);
+    } else {
+      workDiv.style.display = isLife ? 'none' : 'block';
+      lifeDiv.style.display = isLife ? 'block' : 'none';
+    }
+
+    /* Mobile links — show correct set */
+    mobileW.style.display = isLife ? 'none' : 'block';
+    mobileL.style.display = isLife ? 'block' : 'none';
+
+    navSub.textContent = isLife ? ' — Mayank\'s World' : ' — DevOps Engineer';
+    footerW.style.display = isLife ? 'none' : '';
+    footerL.style.display = isLife ? '' : 'none';
 
     workBtn.classList.toggle('active', !isLife);
     lifeBtn.classList.toggle('active', isLife);
     workBtn.setAttribute('aria-pressed', String(!isLife));
     lifeBtn.setAttribute('aria-pressed', String(isLife));
 
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    if (animate) window.scrollTo({top: 0, behavior: 'smooth'});
 
-    if (isLife) {
-      loadStories();
-      loadLifeMedium();
-    }
+    if (isLife) { loadStories(); loadLifeMedium(); }
   }
 
   /* Restore saved mode */
   var savedMode = localStorage.getItem('siteMode') || 'work';
-  setMode(savedMode);
+  setMode(savedMode, false);
 
-  workBtn.addEventListener('click', function() { setMode('work'); });
-  lifeBtn.addEventListener('click', function() { setMode('life'); });
+  workBtn.addEventListener('click', function() { setMode('work', true); });
+  lifeBtn.addEventListener('click', function() { setMode('life', true); });
 
   /* ── Hamburger ── */
   var hamburger = document.getElementById('nav-hamburger');
   var mobileMenu = document.getElementById('nav-mobile-menu');
   function closeMenu() {
     hamburger.classList.remove('open'); mobileMenu.classList.remove('open');
-    hamburger.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true');
+    hamburger.setAttribute('aria-expanded','false');
   }
   hamburger.addEventListener('click', function() {
     var open = mobileMenu.classList.contains('open');
     if (open) { closeMenu(); } else {
-      hamburger.classList.add('open'); mobileMenu.classList.add('open');
-      hamburger.setAttribute('aria-expanded','true'); mobileMenu.setAttribute('aria-hidden','false');
+      hamburger.classList.add('open');
+      mobileMenu.classList.add('open');
+      hamburger.setAttribute('aria-expanded','true');
     }
   });
-  mobileMenu.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
+  /* Close menu on any link click inside */
+  mobileMenu.addEventListener('click', function(e) {
+    if (e.target.tagName === 'A') closeMenu();
+  });
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { closeMenu(); closeStory(); } });
 
   /* ── Back to top ── */
