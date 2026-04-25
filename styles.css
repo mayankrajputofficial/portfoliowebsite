@@ -1052,9 +1052,9 @@ nav {
 
 /* Initial state (set by JS) */
 #work-mode.mode-entering  { animation: slideInFromLeft 0.45s cubic-bezier(0.4,0,0.2,1) forwards; }
-#work-mode.mode-exiting   { animation: slideOutToRight 0.4s cubic-bezier(0.4,0,0.2,1) forwards; }
+#work-mode.mode-exiting { animation: slideOutToLeft 0.4s cubic-bezier(0.4,0,0.2,1) forwards; }
 #life-mode.mode-entering  { animation: slideInFromRight 0.45s cubic-bezier(0.4,0,0.2,1) forwards; }
-#life-mode.mode-exiting   { animation: slideOutToLeft 0.4s cubic-bezier(0.4,0,0.2,1) forwards; }
+#life-mode.mode-exiting { animation: slideOutToRight 0.4s cubic-bezier(0.4,0,0.2,1) forwards; }
 
 @keyframes slideInFromLeft  { from { opacity:0; transform: translateX(-40px); } to { opacity:1; transform: translateX(0); } }
 @keyframes slideInFromRight { from { opacity:0; transform: translateX(40px);  } to { opacity:1; transform: translateX(0); } }
