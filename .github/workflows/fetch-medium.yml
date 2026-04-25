@@ -21,13 +21,10 @@ jobs:
 
       - name: Fetch Medium RSS and save as JSON
         run: |
-          # Fetch the RSS feed directly — no CORS issues server-side
           RSS_URL="https://medium.com/feed/@mayankrajputofficial"
-
           echo "Fetching RSS feed from Medium..."
           curl -fsSL "$RSS_URL" -o medium-feed.xml
 
-          echo "Parsing XML and generating JSON..."
           python3 << 'PYEOF'
           import xml.etree.ElementTree as ET
           import json, re
@@ -36,52 +33,51 @@ jobs:
           tree = ET.parse('medium-feed.xml')
           root = tree.getroot()
 
-          # Medium RSS uses standard RSS 2.0 with some Dublin Core extensions
-          ns = {
-              'dc': 'http://purl.org/dc/elements/1.1/',
-              'content': 'http://purl.org/rss/1.0/modules/content/',
-          }
+          all_items = []
+          work_items = []
+          personal_items = []
 
-          items = []
           for item in root.findall('.//item'):
               title = item.findtext('title', '').strip()
               link  = item.findtext('link', '').strip()
               pub   = item.findtext('pubDate', '').strip()
               desc  = item.findtext('description', '').strip()
-
-              # Categories (Medium tags)
-              cats = [c.text.strip() for c in item.findall('category') if c.text]
-
-              # Strip HTML from description for a clean excerpt
+              cats  = [c.text.strip() for c in item.findall('category') if c.text]
               excerpt = re.sub(r'<[^>]+>', '', desc)[:200].strip()
-
-              # Format date nicely
               try:
                   dt = datetime.strptime(pub[:25].strip(), '%a, %d %b %Y %H:%M:%S')
                   formatted = dt.strftime('%-d %b %Y')
               except Exception:
                   formatted = pub[:16]
 
-              if title and link:
-                  items.append({
-                      'title':    title,
-                      'url':      link,
-                      'date':     formatted,
-                      'rawDate':  pub,
-                      'excerpt':  excerpt,
-                      'tags':     cats[:4],
-                  })
+              if not title or not link:
+                  continue
 
-          output = {
-              'fetchedAt': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
-              'count':     len(items),
-              'posts':     items,
-          }
+              entry = {
+                  'title':   title,
+                  'url':     link,
+                  'date':    formatted,
+                  'rawDate': pub,
+                  'excerpt': excerpt,
+                  'tags':    cats[:4],
+              }
+              all_items.append(entry)
+              cats_lower = [c.lower() for c in cats]
+              if 'personal' in cats_lower:
+                  personal_items.append(entry)
+              elif 'work' in cats_lower or not cats:
+                  work_items.append(entry)
+              else:
+                  work_items.append(entry)
 
-          with open('medium-posts.json', 'w') as f:
-              json.dump(output, f, indent=2, ensure_ascii=False)
+          now = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
 
-          print(f"Saved {len(items)} posts to medium-posts.json")
+          for fname, items in [('medium-posts.json', all_items),
+                                ('medium-work.json', work_items),
+                                ('medium-personal.json', personal_items)]:
+              with open(fname, 'w') as f:
+                  json.dump({'fetchedAt': now, 'count': len(items), 'posts': items}, f, indent=2, ensure_ascii=False)
+              print(f"Saved {len(items)} posts to {fname}")
           PYEOF
 
       - name: Commit and push if changed
@@ -89,7 +85,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add medium-posts.json
+          git add medium-posts.json medium-work.json medium-personal.json
           if git diff --staged --quiet; then
             echo "changed=false" >> $GITHUB_OUTPUT
           else
@@ -98,7 +94,7 @@ jobs:
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
 
-      - name: Update JSON in running container
+      - name: Deploy to VM
         if: steps.commit.outputs.changed == 'true'
         uses: appleboy/ssh-action@v0.1.6
         with:
@@ -108,4 +104,7 @@ jobs:
           script: |
             cd $HOME/portfoliowebsite
             git pull
-            docker cp medium-posts.json portfolio:/usr/share/nginx/html/medium-posts.json
+            docker stop portfolio || true
+            docker rm portfolio || true
+            docker build -t portfolio-app .
+            docker run -d -p 8080:80 --restart always --name portfolio portfolio-app

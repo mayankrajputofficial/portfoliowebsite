@@ -1,0 +1,134 @@
+[
+  {
+    "id": "story-001",
+    "image": "/images/photography/coorg-sunset.jpg",
+    "placeholder_color": "#1a0a00",
+    "title": "Chasing the Last Light at Coorg",
+    "caption": "The kind of sunset that makes you forget you have a phone.",
+    "location": "Coorg, Karnataka",
+    "date": "March 2026",
+    "category": "travel",
+    "instagram_url": "https://www.instagram.com/rextortravels/",
+    "medium_url": "",
+    "story": [
+      {
+        "type": "text",
+        "content": "I had no plan. That was the whole point. Two days before, I was staring at a screen debugging iptables rules on a cloud VM. The kind of work that disappears into a terminal — no visible output, no progress bar, just you and a blinking cursor and the quiet hum of a machine somewhere in Oracle's data centre."
+      },
+      {
+        "type": "text",
+        "content": "I booked the bus ticket at 11 PM. Coorg by 6 AM. I had a camera, a backpack, and a rough idea of a viewpoint someone had mentioned in a Reddit thread three months ago."
+      },
+      {
+        "type": "pullquote",
+        "content": "The best shots happen when you stop trying to get a shot."
+      },
+      {
+        "type": "text",
+        "content": "I found the viewpoint after an hour of walking the wrong direction. By the time I got there, the sun was already low — that golden window that photographers obsess about was closing fast. I had maybe twelve minutes."
+      },
+      {
+        "type": "text",
+        "content": "This is the one frame from those twelve minutes that I kept. Everything else was either overexposed or slightly out of focus. Photography teaches you the same thing that DevOps does: you have to understand the system well enough to act fast when the window opens."
+      }
+    ]
+  },
+  {
+    "id": "story-002",
+    "image": "/images/photography/bike-highway.jpg",
+    "placeholder_color": "#000d1a",
+    "title": "500 km. No Stops. Just Highway.",
+    "caption": "Some questions only get answered at 120 km/h on an empty road.",
+    "location": "NH-48, Rajasthan",
+    "date": "January 2026",
+    "category": "bikes",
+    "instagram_url": "https://www.instagram.com/itsmayankrj/",
+    "medium_url": "",
+    "story": [
+      {
+        "type": "text",
+        "content": "There is a specific kind of silence on a highway at 5 AM. Not the silence of an empty room — more like the silence of a world that hasn't started yet. The road ahead is yours. The trucks are parked. The dhabas are dark."
+      },
+      {
+        "type": "text",
+        "content": "I had been planning this ride for six weeks. Rajasthan in January — cold enough to need two layers under the jacket, clear enough to see the road stretch to the horizon without a single curve for fifteen kilometres straight."
+      },
+      {
+        "type": "pullquote",
+        "content": "A long straight road does something to your head. It empties it out. That's the whole point."
+      },
+      {
+        "type": "text",
+        "content": "500 km in a day is not a flex. It's a meditation. By kilometre 300, you stop thinking about work, about goals, about the gap in your CV. It's just you, the road, the throttle, and the wind noise that makes all other noise irrelevant."
+      },
+      {
+        "type": "text",
+        "content": "I took this shot at a fuel stop somewhere near Jodhpur. The light was flat and grey and perfect. Sometimes the most honest photos happen when you're too tired to overthink the composition."
+      }
+    ]
+  },
+  {
+    "id": "story-003",
+    "image": "/images/photography/gym-morning.jpg",
+    "placeholder_color": "#0a000d",
+    "title": "5 AM. Nobody There. Just Work.",
+    "caption": "The gym at 5 AM is the most honest place I know.",
+    "location": "Local Gym, Jaipur",
+    "date": "February 2026",
+    "category": "fitness",
+    "instagram_url": "https://www.instagram.com/rextorlifts/",
+    "medium_url": "",
+    "story": [
+      {
+        "type": "text",
+        "content": "I started going at 5 AM because the gym was empty. That was the only reason. No waiting for equipment, no social obligations, no need to look like you know what you're doing. Just you, the iron, and whatever is playing in your headphones."
+      },
+      {
+        "type": "text",
+        "content": "It became something else over time. The 5 AM alarm became the first decision of the day — one small, daily proof that I could do the thing I said I would do. That discipline started leaking into everything else. Into the consistency of learning. Into the discipline of shipping code instead of just planning it."
+      },
+      {
+        "type": "pullquote",
+        "content": "The gym doesn't care about your excuses. Neither does production."
+      },
+      {
+        "type": "text",
+        "content": "I'm not a bodybuilder. I'm not training for anything. I just found that a body that moves well makes a mind that thinks better. Two years of consistency and the only thing I've optimised for is showing up."
+      }
+    ]
+  },
+  {
+    "id": "story-004",
+    "image": "/images/photography/street-portrait.jpg",
+    "placeholder_color": "#0d0d00",
+    "title": "The Man Who Sells Tea at the Same Corner Every Day",
+    "caption": "40 years. Same corner. Same fire. Different customers.",
+    "location": "Old City, Jaipur",
+    "date": "December 2025",
+    "category": "photography",
+    "instagram_url": "https://www.instagram.com/rextorclicks/",
+    "medium_url": "",
+    "story": [
+      {
+        "type": "text",
+        "content": "I walk past this corner every morning on my way back from the gym. For three weeks, I noticed the man but didn't stop. Street photography requires a different kind of courage than landscape photography — you're not capturing a place, you're capturing a person's moment, and you have to earn that."
+      },
+      {
+        "type": "text",
+        "content": "On the fourth week I stopped and bought a chai. We talked for twenty minutes. His name is Ramjilal. He has been at this corner since 1984. His father was at this corner before him. He knows every auto driver in a two-kilometre radius by name."
+      },
+      {
+        "type": "pullquote",
+        "content": "He said: 'The city changes every year. The chai stays the same. That's why people come back.'"
+      },
+      {
+        "type": "text",
+        "content": "I asked if I could take a photograph. He straightened his kurta, looked directly at the lens, and held completely still — the way people did for photographs before cameras were everywhere. This is that frame."
+      },
+      {
+        "type": "text",
+        "content": "I've printed this one. It's the only photo I've ever printed."
+      }
+    ]
+  }
+]

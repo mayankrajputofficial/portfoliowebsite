@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" data-mode="work">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Mayank Rajput — Cloud & DevOps Engineer. Building and deploying scalable systems using Docker, CI/CD and cloud infrastructure on Oracle Cloud." />
+  <meta name="description" content="Mayank Rajput — Cloud & DevOps Engineer and curious human. Building systems, chasing sunsets, lifting weights." />
   <meta name="author" content="Mayank Rajput" />
-  <title>Mayank Rajput | DevOps Engineer</title>
-
+  <title>Mayank Rajput</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
@@ -18,360 +17,700 @@
 
 <!-- ── Nav ── -->
 <nav aria-label="Main navigation">
-  <a href="#intro" class="nav-logo">Mayank Rajput<span> — DevOps Engineer</span></a>
-  <div class="nav-links">
+  <a href="#intro" class="nav-logo" id="nav-logo">Mayank Rajput<span id="nav-logo-sub"> — DevOps Engineer</span></a>
+  <div class="nav-links" id="nav-links-work">
     <a href="#about">About</a>
     <a href="#stack">Stack</a>
     <a href="#projects">Projects</a>
     <a href="#blog">Blog</a>
     <a href="#contact">Contact</a>
   </div>
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">☀</button>
-  <a href="#contact" class="nav-cta">Hire me &rarr;</a>
+  <div class="nav-links" id="nav-links-life" style="display:none">
+    <a href="#life-about">About</a>
+    <a href="#life-hobbies">Interests</a>
+    <a href="#life-stories">Stories</a>
+    <a href="#life-blog">Writing</a>
+    <a href="#life-connect">Connect</a>
+  </div>
+
+  <!-- Mode toggle pill -->
+  <div class="mode-pill" id="mode-pill" role="group" aria-label="Switch site mode">
+    <button class="mode-btn mode-work active" id="mode-work-btn" aria-pressed="true">⚙ Work</button>
+    <button class="mode-btn mode-life" id="mode-life-btn" aria-pressed="false">✦ Life</button>
+  </div>
+
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">☀</button>
+  <a href="#contact" class="nav-cta" id="nav-cta">Hire me &rarr;</a>
   <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile-menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
-<!-- ── Mobile nav ── -->
+<!-- Mobile nav -->
 <div class="nav-mobile-menu" id="nav-mobile-menu" aria-hidden="true">
-  <a href="#about">About</a>
-  <a href="#stack">Stack</a>
-  <a href="#projects">Projects</a>
-  <a href="#blog">Blog</a>
-  <a href="#contact">Contact</a>
-  <a href="#contact" class="mobile-cta">Hire me &rarr;</a>
+  <div id="mobile-work-links">
+    <a href="#about">About</a>
+    <a href="#stack">Stack</a>
+    <a href="#projects">Projects</a>
+    <a href="#blog">Blog</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="mobile-cta">Hire me &rarr;</a>
+  </div>
+  <div id="mobile-life-links" style="display:none">
+    <a href="#life-about">About</a>
+    <a href="#life-hobbies">Interests</a>
+    <a href="#life-stories">Stories</a>
+    <a href="#life-blog">Writing</a>
+    <a href="#life-connect">Connect</a>
+  </div>
 </div>
 
-<!-- ── Open-to-work strip ── -->
-<div class="ofw-strip" role="banner">
-  <div class="ofw-dot" aria-hidden="true"></div>
-  Open to DevOps &amp; Cloud roles &middot; Remote or India-based
+<!-- ══════════════════════════════════════════════════
+     WORK MODE
+     ══════════════════════════════════════════════════ -->
+<div id="work-mode">
+
+  <div class="ofw-strip" role="banner">
+    <div class="ofw-dot"></div>
+    Open to DevOps &amp; Cloud roles &middot; Remote or India-based
+  </div>
+
+  <section id="intro" style="border-top:none; padding-bottom:56px;">
+    <div class="section-inner" id="main-content">
+      <div class="hero">
+        <div class="hero-content">
+          <div class="hero-eyebrow">DevOps Engineer</div>
+          <h1 class="hero-name">Mayank<br>Rajput</h1>
+          <p class="hero-desc">
+            Building <strong>production-grade infrastructure</strong> on Oracle Cloud with Docker, Nginx &amp; GitHub Actions CI/CD.
+            Transitioning from corporate to cloud — learning in public, shipping real systems.
+          </p>
+          <div class="hero-actions">
+            <a href="#projects" class="btn-primary">View Projects &darr;</a>
+            <a href="#contact" class="btn-secondary">Get in touch &rarr;</a>
+          </div>
+          <div class="hero-socials">
+            <a href="https://github.com/mayankrajputofficial" target="_blank" rel="noopener noreferrer" class="social-chip">&#8599; GitHub</a>
+            <a href="https://linkedin.com/in/mayankrajputofficial" target="_blank" rel="noopener noreferrer" class="social-chip">&#8599; LinkedIn</a>
+            <a href="/blog.html" class="social-chip">&#8599; Blog</a>
+            <a href="mailto:mayankrajputofficial@gmail.com" class="social-chip">@ Email</a>
+          </div>
+        </div>
+        <div class="hero-photo-wrap">
+          <div class="hero-photo-ring">
+            <img src="/images/mayank.jpg" alt="Mayank Rajput" class="hero-photo" />
+          </div>
+          <div class="hero-photo-tag"><span class="hero-photo-dot"></span>Open to work</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-inner">
+      <div class="section-header"><h2 class="section-title">About</h2></div>
+      <p class="about-text">I'm a <strong>Cloud &amp; DevOps Engineer</strong> building and running production systems on Oracle Cloud Infrastructure. After leaving a corporate job, I made a deliberate pivot into infrastructure and automation — learning by doing, not just watching tutorials.</p>
+      <p class="about-text" style="margin-top:16px;">My current setup: a self-hosted portfolio running on an <strong>OCI Always Free VM</strong> (1 CPU, 1 GB RAM) — containerised with Docker, served by Nginx, deployed automatically via <strong>GitHub Actions CI/CD</strong>. Every piece of the stack is something I debugged, fixed, and understood — from iptables rules to SSH key permissions.</p>
+      <p class="about-text" style="margin-top:16px;">I document everything I learn on my <a href="/blog.html" style="color:var(--accent);text-decoration:none;">blog</a> — real debugging stories, real infrastructure lessons. No fluff. Actively working toward <strong>OCI certifications</strong> and deeper Kubernetes &amp; Terraform experience.</p>
+    </div>
+  </section>
+
+  <section id="stack">
+    <div class="section-inner">
+      <div class="section-header"><h2 class="section-title">Tech Stack</h2></div>
+      <div class="stack-groups">
+        <div>
+          <div class="stack-group-label">Cloud &amp; Infrastructure</div>
+          <div class="tag-cloud">
+            <span class="tech-tag primary">Amazon Web Services (AWS)</span>
+            <span class="tech-tag">Oracle Cloud (OCI)</span>
+            <span class="tech-tag">Linux (Ubuntu)</span>
+            <span class="tech-tag">Networking</span>
+            <span class="tech-tag">iptables</span>
+            <span class="tech-tag">Nginx</span>
+          </div>
+        </div>
+        <div>
+          <div class="stack-group-label">Containers &amp; Deployment</div>
+          <div class="tag-cloud">
+            <span class="tech-tag primary">Docker</span>
+            <span class="tech-tag">Nginx Reverse Proxy</span>
+          </div>
+        </div>
+        <div>
+          <div class="stack-group-label">CI/CD</div>
+          <div class="tag-cloud">
+            <span class="tech-tag primary">GitHub Actions</span>
+            <span class="tech-tag">Git</span>
+            <span class="tech-tag">SSH Deployment</span>
+          </div>
+        </div>
+        <div>
+          <div class="stack-group-label">Languages &amp; Scripting</div>
+          <div class="tag-cloud">
+            <span class="tech-tag primary">Bash</span>
+            <span class="tech-tag">YAML</span>
+            <span class="tech-tag">HTML/CSS</span>
+          </div>
+        </div>
+        <div>
+          <div class="stack-group-label">Learning Next</div>
+          <div class="tag-cloud">
+            <span class="tech-tag">Terraform</span>
+            <span class="tech-tag">Kubernetes</span>
+            <span class="tech-tag">OCI Certification</span>
+            <span class="tech-tag">Ansible</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2 class="section-title">Latest Projects</h2>
+        <span class="section-count">01</span>
+        <a href="https://github.com/mayankrajputofficial" target="_blank" rel="noopener noreferrer" class="section-action">All on GitHub &rarr;</a>
+      </div>
+      <div class="filter-row" role="group" aria-label="Filter projects">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="docker">Docker</button>
+        <button class="filter-btn" data-filter="cicd">CI/CD</button>
+        <button class="filter-btn" data-filter="oci">OCI</button>
+      </div>
+      <div class="projects-grid" id="projects-grid">
+        <div class="project-card" data-tags="docker cicd oci">
+          <div class="project-cover project-cover--placeholder">
+            <div class="project-cover-inner">
+              <span class="cover-label">OCI &nbsp;·&nbsp; Docker &nbsp;·&nbsp; Nginx &nbsp;·&nbsp; GitHub Actions</span>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-title">Production Portfolio — Self-Hosted on Oracle Cloud</div>
+            <div class="project-desc">Full production stack on an OCI Always Free VM (1 CPU / 1 GB RAM). Dockerised Nginx serving static files, automated CI/CD pipeline with GitHub Actions that SSH-deploys on every push. Debugged real firewall, iptables, and networking issues end-to-end.</div>
+            <div class="project-tags">
+              <span class="proj-tag">OCI</span><span class="proj-tag">Docker</span><span class="proj-tag">Nginx</span><span class="proj-tag">GitHub Actions</span><span class="proj-tag">iptables</span><span class="proj-tag">Linux</span>
+            </div>
+            <div class="project-links">
+              <a href="/blog.html" class="proj-link">Blog posts &rarr;</a>
+              <a href="https://github.com/mayankrajputofficial/portfoliowebsite" target="_blank" rel="noopener noreferrer" class="proj-link primary">GitHub &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="coming-soon"><span class="coming-soon-dot"></span>More projects in progress — building in public</div>
+    </div>
+  </section>
+
+  <section id="blog" class="blog-cta-section">
+    <div class="blog-cta-inner">
+      <div style="flex:1;min-width:220px;">
+        <div class="blog-eyebrow">Writing</div>
+        <h2 class="blog-heading">Real debugging.<br>Real infrastructure.</h2>
+        <p class="blog-sub">DevOps deep-dives on the site. Everything else on Medium. No tutorial fluff — just what I actually build and break.</p>
+        <a href="/blog.html" class="btn-primary" style="background:var(--accent);margin-top:8px;display:inline-flex;">Read the blog &rarr;</a>
+      </div>
+      <div class="blog-cards">
+        <a href="/posts/nginx-debug.html" class="blog-card">
+          <div class="blog-card-label">on-site · devops</div>
+          <div class="blog-card-title">Debugging Nginx 504 Gateway Timeout</div>
+          <div class="blog-card-meta">Nginx &middot; Docker &middot; OCI Networking</div>
+        </a>
+        <a href="/posts/iptables-lesson.html" class="blog-card">
+          <div class="blog-card-label">on-site · linux</div>
+          <div class="blog-card-title">Understanding iptables Through a Real Issue</div>
+          <div class="blog-card-meta">Linux &middot; Firewall &middot; Networking</div>
+        </a>
+        <a href="https://medium.com/@mayankrajputofficial" target="_blank" rel="noopener noreferrer" class="blog-card" style="border-color:rgba(255,255,255,0.15);">
+          <div class="blog-card-label">medium</div>
+          <div class="blog-card-title">More articles on Medium &rarr;</div>
+          <div class="blog-card-meta">medium.com/@mayankrajputofficial</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-inner">
+      <div class="section-header"><h2 class="section-title">Get in Touch</h2></div>
+      <div class="contact-layout">
+        <div>
+          <p class="contact-desc">Whether it's a DevOps role, a collaboration, or just a question about cloud infrastructure — I'm happy to connect.</p>
+          <div class="contact-links">
+            <a href="mailto:mayankrajputofficial@gmail.com" class="contact-link">
+              <div class="contact-link-icon">&#9993;</div>mayankrajputofficial@gmail.com
+            </a>
+            <a href="https://linkedin.com/in/mayankrajputofficial" target="_blank" rel="noopener noreferrer" class="contact-link">
+              <div class="contact-link-icon" style="font-size:12px;font-weight:700;">in</div>linkedin.com/in/mayankrajputofficial
+            </a>
+            <a href="https://github.com/mayankrajputofficial" target="_blank" rel="noopener noreferrer" class="contact-link">
+              <div class="contact-link-icon" style="font-family:var(--mono);font-size:11px;">gh</div>github.com/mayankrajputofficial
+            </a>
+          </div>
+        </div>
+        <div class="contact-note">
+          <div class="contact-note-label">Current Setup</div>
+          <div class="contact-note-stack">
+            <div class="stack-line"><span class="stack-dot"></span>Oracle Cloud Free VM — live</div>
+            <div class="stack-line"><span class="stack-dot"></span>Docker + Nginx — running</div>
+            <div class="stack-line"><span class="stack-dot"></span>GitHub Actions CI/CD — active</div>
+            <div class="stack-line stack-line--dim"><span class="stack-dot stack-dot--dim"></span>Terraform — coming soon</div>
+            <div class="stack-line stack-line--dim"><span class="stack-dot stack-dot--dim"></span>Kubernetes — learning</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /work-mode -->
+
+
+<!-- ══════════════════════════════════════════════════
+     LIFE MODE
+     ══════════════════════════════════════════════════ -->
+<div id="life-mode" style="display:none">
+
+  <!-- Life hero -->
+  <section id="life-intro" style="border-top:none; padding-bottom:56px;">
+    <div class="section-inner">
+      <div class="hero">
+        <div class="hero-content">
+          <div class="hero-eyebrow life-eyebrow">Living, learning, wandering</div>
+          <h1 class="hero-name life-name">Mayank<br>Rajput</h1>
+          <p class="hero-desc">
+            Fitness enthusiast. Traveller. <strong>Photographer</strong>. Bike &amp; car obsessive.
+            Tech geek in every sense of the word. Documenting life as it happens.
+          </p>
+          <div class="hero-actions">
+            <a href="#life-stories" class="btn-primary life-btn-primary">Read Stories &darr;</a>
+            <a href="#life-connect" class="btn-secondary">Find me online &rarr;</a>
+          </div>
+          <div class="hero-socials">
+            <a href="https://www.instagram.com/itsmayankrj/" target="_blank" rel="noopener noreferrer" class="social-chip life-chip">&#8599; @itsmayankrj</a>
+            <a href="https://www.instagram.com/rextorclicks/" target="_blank" rel="noopener noreferrer" class="social-chip life-chip">&#8599; @rextorclicks</a>
+            <a href="https://www.instagram.com/rextorlifts/" target="_blank" rel="noopener noreferrer" class="social-chip life-chip">&#8599; @rextorlifts</a>
+            <a href="https://www.instagram.com/rextortravels/" target="_blank" rel="noopener noreferrer" class="social-chip life-chip">&#8599; @rextortravels</a>
+          </div>
+        </div>
+        <div class="hero-photo-wrap">
+          <div class="hero-photo-ring life-ring">
+            <img src="/images/mayank-personal.jpg" alt="Mayank Rajput" class="hero-photo" />
+          </div>
+          <div class="hero-photo-tag life-tag">
+            <span class="hero-photo-dot life-dot"></span>Living &amp; exploring
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Life about -->
+  <section id="life-about" class="life-section-alt">
+    <div class="section-inner">
+      <div class="section-header"><h2 class="section-title life-title">Who I Am</h2></div>
+      <p class="about-text">Outside the terminal, I'm someone who believes the best way to understand the world is to move through it. I ride bikes on empty highways at sunrise, lift weights before the city wakes up, and chase light with a camera in places most people don't think to stop.</p>
+      <p class="about-text" style="margin-top:16px;">I'm as obsessive about gadgets and new technology as I am about cloud infrastructure — probably more so. If there's a new phone, a new car, a new piece of kit that does something interesting, I want to understand how it works and whether it's actually good or just marketed well.</p>
+      <p class="about-text" style="margin-top:16px;">Everything on this page — the photos, the stories, the writing — is real. No aesthetic curation. Just what actually happened.</p>
+    </div>
+  </section>
+
+  <!-- Hobbies / Interests -->
+  <section id="life-hobbies">
+    <div class="section-inner">
+      <div class="section-header"><h2 class="section-title life-title">Interests</h2></div>
+      <div class="hobbies-grid">
+        <div class="hobby-card">
+          <div class="hobby-icon">🏋️</div>
+          <div class="hobby-name">Fitness</div>
+          <div class="hobby-desc">5 AM lifts. Consistency over intensity. Two years of showing up.</div>
+          <a href="https://www.instagram.com/rextorlifts/" target="_blank" rel="noopener noreferrer" class="hobby-link">@rextorlifts &rarr;</a>
+        </div>
+        <div class="hobby-card">
+          <div class="hobby-icon">✈️</div>
+          <div class="hobby-name">Travel</div>
+          <div class="hobby-desc">No itinerary. Book the ticket, figure out the rest on arrival.</div>
+          <a href="https://www.instagram.com/rextortravels/" target="_blank" rel="noopener noreferrer" class="hobby-link">@rextortravels &rarr;</a>
+        </div>
+        <div class="hobby-card">
+          <div class="hobby-icon">📷</div>
+          <div class="hobby-name">Photography</div>
+          <div class="hobby-desc">Street. Landscape. Whatever the light allows. Always film-inspired.</div>
+          <a href="https://www.instagram.com/rextorclicks/" target="_blank" rel="noopener noreferrer" class="hobby-link">@rextorclicks &rarr;</a>
+        </div>
+        <div class="hobby-card">
+          <div class="hobby-icon">🏍️</div>
+          <div class="hobby-name">Bikes &amp; Cars</div>
+          <div class="hobby-desc">Obsessive about machines. The engineering, the sound, the feel.</div>
+          <a href="https://www.instagram.com/itsmayankrj/" target="_blank" rel="noopener noreferrer" class="hobby-link">@itsmayankrj &rarr;</a>
+        </div>
+        <div class="hobby-card">
+          <div class="hobby-icon">📱</div>
+          <div class="hobby-name">Tech &amp; Gadgets</div>
+          <div class="hobby-desc">Every new device is a puzzle. I want to understand what's actually good.</div>
+          <a href="https://www.instagram.com/itsmayankrj/" target="_blank" rel="noopener noreferrer" class="hobby-link">@itsmayankrj &rarr;</a>
+        </div>
+        <div class="hobby-card">
+          <div class="hobby-icon">🎮</div>
+          <div class="hobby-name">Gaming</div>
+          <div class="hobby-desc">Serious about it. Not ashamed of it.</div>
+          <a href="https://www.instagram.com/rextorplays/" target="_blank" rel="noopener noreferrer" class="hobby-link">@rextorplays &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo Stories Grid -->
+  <section id="life-stories" class="life-section-alt">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2 class="section-title life-title">Stories</h2>
+        <span class="section-count" id="story-count">04</span>
+      </div>
+      <p class="about-text" style="margin-bottom:32px;">Every photo has a story. Click any one to read it.</p>
+      <div class="stories-grid" id="stories-grid">
+        <!-- Rendered by JS from stories.json -->
+        <div class="stories-loading">
+          <div class="feed-loading-dot" style="background:var(--life-accent)"></div>
+          Loading stories…
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Life blog — personal Medium posts -->
+  <section id="life-blog">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2 class="section-title life-title">Writing</h2>
+        <a href="https://medium.com/@mayankrajputofficial" target="_blank" rel="noopener noreferrer" class="section-action">Follow on Medium &rarr;</a>
+      </div>
+      <div id="life-medium-feed">
+        <div class="feed-loading">
+          <div class="feed-loading-dot" style="background:var(--life-accent)"></div>
+          Loading from Medium…
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Connect -->
+  <section id="life-connect" class="life-section-alt">
+    <div class="section-inner">
+      <div class="section-header"><h2 class="section-title life-title">Find Me</h2></div>
+      <div class="life-connect-grid">
+        <a href="https://www.instagram.com/itsmayankrj/" target="_blank" rel="noopener noreferrer" class="life-connect-card">
+          <div class="lcc-handle">@itsmayankrj</div>
+          <div class="lcc-desc">Main account — everything</div>
+          <div class="lcc-arrow">&rarr;</div>
+        </a>
+        <a href="https://www.instagram.com/rextorclicks/" target="_blank" rel="noopener noreferrer" class="life-connect-card">
+          <div class="lcc-handle">@rextorclicks</div>
+          <div class="lcc-desc">Photography</div>
+          <div class="lcc-arrow">&rarr;</div>
+        </a>
+        <a href="https://www.instagram.com/rextorlifts/" target="_blank" rel="noopener noreferrer" class="life-connect-card">
+          <div class="lcc-handle">@rextorlifts</div>
+          <div class="lcc-desc">Fitness</div>
+          <div class="lcc-arrow">&rarr;</div>
+        </a>
+        <a href="https://www.instagram.com/rextortravels/" target="_blank" rel="noopener noreferrer" class="life-connect-card">
+          <div class="lcc-handle">@rextortravels</div>
+          <div class="lcc-desc">Travel</div>
+          <div class="lcc-arrow">&rarr;</div>
+        </a>
+        <a href="https://www.instagram.com/rextorplays/" target="_blank" rel="noopener noreferrer" class="life-connect-card">
+          <div class="lcc-handle">@rextorplays</div>
+          <div class="lcc-desc">Gaming</div>
+          <div class="lcc-arrow">&rarr;</div>
+        </a>
+        <a href="https://medium.com/@mayankrajputofficial" target="_blank" rel="noopener noreferrer" class="life-connect-card">
+          <div class="lcc-handle">Medium</div>
+          <div class="lcc-desc">Long-form writing</div>
+          <div class="lcc-arrow">&rarr;</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /life-mode -->
+
+
+<!-- ── Story lightbox ── -->
+<div id="story-overlay" class="story-overlay" aria-modal="true" role="dialog" aria-hidden="true">
+  <div class="story-overlay-bg" id="story-overlay-bg"></div>
+  <article class="story-article" id="story-article">
+    <button class="story-close" id="story-close" aria-label="Close story">&times;</button>
+    <div id="story-content"></div>
+  </article>
 </div>
 
-<!-- ── Hero ── -->
-<section id="intro" style="border-top:none; padding-bottom:56px;">
-  <div class="section-inner" id="main-content">
-    <div class="hero">
-      <div class="hero-content">
-        <div class="hero-eyebrow">DevOps Engineer</div>
-        <h1 class="hero-name">Mayank<br>Rajput</h1>
-        <p class="hero-desc">
-          Building <strong>production-grade infrastructure</strong> on Oracle Cloud with Docker, Nginx &amp; GitHub Actions CI/CD.
-          Transitioning from corporate to cloud — learning in public, shipping real systems.
-        </p>
-        <div class="hero-actions">
-          <a href="#projects" class="btn-primary">View Projects &darr;</a>
-          <a href="#contact" class="btn-secondary">Get in touch &rarr;</a>
-        </div>
-        <div class="hero-socials">
-          <a href="https://github.com/mayankrajputofficial" target="_blank" rel="noopener noreferrer" class="social-chip">&#8599; GitHub</a>
-          <a href="https://linkedin.com/in/mayankrajputofficial" target="_blank" rel="noopener noreferrer" class="social-chip">&#8599; LinkedIn</a>
-          <a href="/blog.html" class="social-chip">&#8599; Blog</a>
-          <a href="mailto:mayankrajputofficial@gmail.com" class="social-chip">@ Email</a>
-        </div>
-      </div>
-      <!-- Profile photo -->
-      <div class="hero-photo-wrap">
-        <div class="hero-photo-ring">
-          <img src="/images/mayank.jpg" alt="Mayank Rajput" class="hero-photo" />
-        </div>
-        <div class="hero-photo-tag">
-          <span class="hero-photo-dot"></span>Open to work
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ── About ── -->
-<section id="about">
-  <div class="section-inner">
-    <div class="section-header">
-      <h2 class="section-title">About</h2>
-    </div>
-    <p class="about-text">
-      I'm a <strong>Cloud &amp; DevOps Engineer</strong> building and running production systems on Oracle Cloud Infrastructure.
-      After leaving a corporate job, I made a deliberate pivot into infrastructure and automation — learning by doing, not just watching tutorials.
-    </p>
-    <p class="about-text" style="margin-top:16px;">
-      My current setup: a self-hosted portfolio running on an <strong>OCI Always Free VM</strong> (1 CPU, 1 GB RAM) —
-      containerised with Docker, served by Nginx, deployed automatically via <strong>GitHub Actions CI/CD</strong>.
-      Every piece of the stack is something I debugged, fixed, and understood — from iptables rules to SSH key permissions.
-    </p>
-    <p class="about-text" style="margin-top:16px;">
-      I document everything I learn on my <a href="/blog.html" style="color:var(--accent);text-decoration:none;">blog</a> —
-      real debugging stories, real infrastructure lessons. No fluff. I'm actively working toward
-      <strong>OCI certifications</strong> and deeper Kubernetes &amp; Terraform experience.
-    </p>
-  </div>
-</section>
-
-<!-- ── Tech Stack ── -->
-<section id="stack">
-  <div class="section-inner">
-    <div class="section-header">
-      <h2 class="section-title">Tech Stack</h2>
-    </div>
-    <div class="stack-groups">
-      <div>
-        <div class="stack-group-label">Cloud &amp; Infrastructure</div>
-        <div class="tag-cloud">
-          <span class="tech-tag primary">Amazon Web Services (AWS)</span>
-          <span class="tech-tag">Oracle Cloud (OCI)</span>
-          <span class="tech-tag">Linux (Ubuntu)</span>
-          <span class="tech-tag">Networking</span>
-          <span class="tech-tag">iptables</span>
-          <span class="tech-tag">Nginx</span>
-        </div>
-      </div>
-      <div>
-        <div class="stack-group-label">Containers &amp; Deployment</div>
-        <div class="tag-cloud">
-          <span class="tech-tag primary">Docker</span>
-          <span class="tech-tag">Nginx Reverse Proxy</span>
-        </div>
-      </div>
-      <div>
-        <div class="stack-group-label">CI/CD</div>
-        <div class="tag-cloud">
-          <span class="tech-tag primary">GitHub Actions</span>
-          <span class="tech-tag">Git</span>
-          <span class="tech-tag">SSH Deployment</span>
-        </div>
-      </div>
-      <div>
-        <div class="stack-group-label">Languages &amp; Scripting</div>
-        <div class="tag-cloud">
-          <span class="tech-tag primary">Bash</span>
-          <span class="tech-tag">YAML</span>
-          <span class="tech-tag">HTML/CSS</span>
-        </div>
-      </div>
-      <div>
-        <div class="stack-group-label">Learning Next</div>
-        <div class="tag-cloud">
-          <span class="tech-tag">Terraform</span>
-          <span class="tech-tag">Kubernetes</span>
-          <span class="tech-tag">OCI Certification</span>
-          <span class="tech-tag">Ansible</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Projects ── -->
-<section id="projects">
-  <div class="section-inner">
-    <div class="section-header">
-      <h2 class="section-title">Latest Projects</h2>
-      <span class="section-count">01</span>
-      <a href="https://github.com/mayankrajputofficial" target="_blank" rel="noopener noreferrer" class="section-action">All on GitHub &rarr;</a>
-    </div>
-
-    <div class="filter-row" role="group" aria-label="Filter projects">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="docker">Docker</button>
-      <button class="filter-btn" data-filter="cicd">CI/CD</button>
-      <button class="filter-btn" data-filter="oci">OCI</button>
-    </div>
-
-    <div class="projects-grid" id="projects-grid">
-      <div class="project-card" data-tags="docker cicd oci">
-        <div class="project-cover project-cover--placeholder">
-          <div class="project-cover-inner">
-            <span class="cover-label">OCI &nbsp;·&nbsp; Docker &nbsp;·&nbsp; Nginx &nbsp;·&nbsp; GitHub Actions</span>
-          </div>
-        </div>
-        <div class="project-body">
-          <div class="project-title">Production Portfolio — Self-Hosted on Oracle Cloud</div>
-          <div class="project-desc">
-            Full production stack on an OCI Always Free VM (1 CPU / 1 GB RAM). Dockerised Nginx serving static files,
-            automated CI/CD pipeline with GitHub Actions that SSH-deploys on every push. Debugged real firewall,
-            iptables, and networking issues end-to-end.
-          </div>
-          <div class="project-tags">
-            <span class="proj-tag">OCI</span>
-            <span class="proj-tag">Docker</span>
-            <span class="proj-tag">Nginx</span>
-            <span class="proj-tag">GitHub Actions</span>
-            <span class="proj-tag">iptables</span>
-            <span class="proj-tag">Linux</span>
-          </div>
-          <div class="project-links">
-            <a href="/blog.html" class="proj-link">Blog posts &rarr;</a>
-            <a href="https://github.com/mayankrajputofficial/portfoliowebsite" target="_blank" rel="noopener noreferrer" class="proj-link primary">GitHub &rarr;</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="coming-soon">
-      <span class="coming-soon-dot"></span>
-      More projects in progress — building in public
-    </div>
-  </div>
-</section>
-
-<!-- ── Blog CTA ── -->
-<section id="blog" class="blog-cta-section">
-  <div class="blog-cta-inner">
-    <div style="flex:1; min-width:220px;">
-      <div class="blog-eyebrow">Writing</div>
-      <h2 class="blog-heading">Real debugging.<br>Real infrastructure.</h2>
-      <p class="blog-sub">DevOps deep-dives on the site. Everything else on Medium. No tutorial fluff — just what I actually build and break.</p>
-      <a href="/blog.html" class="btn-primary" style="background:var(--accent); margin-top:8px; display:inline-flex;">Read the blog &rarr;</a>
-    </div>
-    <div class="blog-cards">
-      <a href="/posts/nginx-debug.html" class="blog-card">
-        <div class="blog-card-label">on-site · devops</div>
-        <div class="blog-card-title">Debugging Nginx 504 Gateway Timeout</div>
-        <div class="blog-card-meta">Nginx &middot; Docker &middot; OCI Networking</div>
-      </a>
-      <a href="/posts/iptables-lesson.html" class="blog-card">
-        <div class="blog-card-label">on-site · linux</div>
-        <div class="blog-card-title">Understanding iptables Through a Real Issue</div>
-        <div class="blog-card-meta">Linux &middot; Firewall &middot; Networking</div>
-      </a>
-      <a href="https://medium.com/@mayankrajputofficial" target="_blank" rel="noopener noreferrer" class="blog-card" style="border-color:rgba(255,255,255,0.15);">
-        <div class="blog-card-label">medium</div>
-        <div class="blog-card-title">More articles on Medium &rarr;</div>
-        <div class="blog-card-meta">medium.com/@mayankrajputofficial</div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ── Contact ── -->
-<section id="contact">
-  <div class="section-inner">
-    <div class="section-header">
-      <h2 class="section-title">Get in Touch</h2>
-    </div>
-    <div class="contact-layout">
-      <div>
-        <p class="contact-desc">
-          Whether it's a DevOps role, a collaboration, or just a question about cloud infrastructure — I'm happy to connect.
-        </p>
-        <div class="contact-links">
-          <a href="mailto:mayankrajputofficial@gmail.com" class="contact-link">
-            <div class="contact-link-icon">&#9993;</div>
-            mayankrajputofficial@gmail.com
-          </a>
-          <a href="https://linkedin.com/in/mayankrajputofficial" target="_blank" rel="noopener noreferrer" class="contact-link">
-            <div class="contact-link-icon" style="font-size:12px;font-weight:700;">in</div>
-            linkedin.com/in/mayankrajputofficial
-          </a>
-          <a href="https://github.com/mayankrajputofficial" target="_blank" rel="noopener noreferrer" class="contact-link">
-            <div class="contact-link-icon" style="font-family:var(--mono);font-size:11px;">gh</div>
-            github.com/mayankrajputofficial
-          </a>
-        </div>
-      </div>
-      <div class="contact-note">
-        <div class="contact-note-label">Current Setup</div>
-        <div class="contact-note-stack">
-          <div class="stack-line"><span class="stack-dot"></span>Oracle Cloud Free VM — live</div>
-          <div class="stack-line"><span class="stack-dot"></span>Docker + Nginx — running</div>
-          <div class="stack-line"><span class="stack-dot"></span>GitHub Actions CI/CD — active</div>
-          <div class="stack-line stack-line--dim"><span class="stack-dot stack-dot--dim"></span>Terraform — coming soon</div>
-          <div class="stack-line stack-line--dim"><span class="stack-dot stack-dot--dim"></span>Kubernetes — learning</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Footer ── -->
-<footer>
+<!-- ── Shared footer ── -->
+<footer id="site-footer">
   <span>&copy; <span id="currentYear"></span> Mayank Rajput</span>
   <span>&middot;</span>
   <a href="https://techymayank.com">techymayank.com</a>
   <div class="footer-divider"></div>
-  <a href="https://github.com/mayankrajputofficial" target="_blank" rel="noopener noreferrer">GitHub &rarr;</a>
-  <a href="https://linkedin.com/in/mayankrajputofficial" target="_blank" rel="noopener noreferrer">LinkedIn &rarr;</a>
+  <span id="footer-work-links">
+    <a href="https://github.com/mayankrajputofficial" target="_blank" rel="noopener noreferrer">GitHub &rarr;</a>
+    <a href="https://linkedin.com/in/mayankrajputofficial" target="_blank" rel="noopener noreferrer">LinkedIn &rarr;</a>
+  </span>
+  <span id="footer-life-links" style="display:none">
+    <a href="https://www.instagram.com/itsmayankrj/" target="_blank" rel="noopener noreferrer">Instagram &rarr;</a>
+    <a href="https://medium.com/@mayankrajputofficial" target="_blank" rel="noopener noreferrer">Medium &rarr;</a>
+  </span>
 </footer>
 
 <button type="button" id="goTopBtn" title="Back to top" aria-label="Scroll to top">&#8679;</button>
 
 <script>
+/* ══════════════════════════════════════════════════
+   INIT — year, theme
+   ══════════════════════════════════════════════════ */
 document.getElementById('currentYear').textContent = new Date().getFullYear();
 
 (function() {
   var saved = localStorage.getItem('theme') || 'dark';
   document.documentElement.setAttribute('data-theme', saved);
-  document.addEventListener('DOMContentLoaded', function() {
-    var btn = document.getElementById('theme-toggle');
-    function updateIcon() {
-      btn.textContent = document.documentElement.getAttribute('data-theme') === 'dark' ? '☀' : '☾';
-    }
-    updateIcon();
-    btn.addEventListener('click', function() {
-      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      var next = isDark ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      updateIcon();
-    });
-  });
 })();
-
-(function() {
-  document.addEventListener('DOMContentLoaded', function() {
-    var btn = document.getElementById('nav-hamburger');
-    var menu = document.getElementById('nav-mobile-menu');
-    if (!btn || !menu) return;
-    function close() {
-      btn.classList.remove('open'); menu.classList.remove('open');
-      btn.setAttribute('aria-expanded','false'); menu.setAttribute('aria-hidden','true');
-    }
-    btn.addEventListener('click', function() {
-      var open = menu.classList.contains('open');
-      if (open) { close(); } else {
-        btn.classList.add('open'); menu.classList.add('open');
-        btn.setAttribute('aria-expanded','true'); menu.setAttribute('aria-hidden','false');
-      }
-    });
-    menu.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', close); });
-    document.addEventListener('keydown', function(e) { if (e.key==='Escape') close(); });
-  });
-})();
-
-(function() {
-  var btn = document.getElementById('goTopBtn');
-  window.addEventListener('scroll', function() {
-    btn.classList.toggle('visible', window.scrollY > 400);
-  });
-  btn.addEventListener('click', function() { window.scrollTo({top:0, behavior:'smooth'}); });
-})();
-
-document.querySelectorAll('.filter-btn').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
-    btn.classList.add('active');
-    var filter = btn.dataset.filter;
-    document.querySelectorAll('.project-card').forEach(function(card) {
-      card.classList.toggle('hidden', filter !== 'all' && !(card.dataset.tags||'').includes(filter));
-    });
-  });
-});
 
 document.addEventListener('DOMContentLoaded', function() {
-  var n = document.querySelectorAll('#projects .project-card').length;
-  var el = document.querySelector('#projects .section-count');
-  if (el) el.textContent = String(n).padStart(2,'0');
-});
 
-(function() {
-  var els = document.querySelectorAll('.project-card, .about-text, .blog-card, .contact-link');
+  /* ── Theme toggle ── */
+  var themeBtn = document.getElementById('theme-toggle');
+  function updateThemeIcon() {
+    themeBtn.textContent = document.documentElement.getAttribute('data-theme') === 'dark' ? '☀' : '☾';
+  }
+  updateThemeIcon();
+  themeBtn.addEventListener('click', function() {
+    var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    updateThemeIcon();
+  });
+
+  /* ══════════════════════════════════════════════════
+     MODE TOGGLE — Work ↔ Life
+     ══════════════════════════════════════════════════ */
+  var workBtn  = document.getElementById('mode-work-btn');
+  var lifeBtn  = document.getElementById('mode-life-btn');
+  var workDiv  = document.getElementById('work-mode');
+  var lifeDiv  = document.getElementById('life-mode');
+  var navCta   = document.getElementById('nav-cta');
+  var navSub   = document.getElementById('nav-logo-sub');
+  var navW     = document.getElementById('nav-links-work');
+  var navL     = document.getElementById('nav-links-life');
+  var mobileW  = document.getElementById('mobile-work-links');
+  var mobileL  = document.getElementById('mobile-life-links');
+  var footerW  = document.getElementById('footer-work-links');
+  var footerL  = document.getElementById('footer-life-links');
+
+  function setMode(mode) {
+    var isLife = mode === 'life';
+    document.documentElement.setAttribute('data-mode', mode);
+    localStorage.setItem('siteMode', mode);
+
+    workDiv.style.display  = isLife ? 'none' : 'block';
+    lifeDiv.style.display  = isLife ? 'block' : 'none';
+    navW.style.display     = isLife ? 'none' : 'flex';
+    navL.style.display     = isLife ? 'flex' : 'none';
+    mobileW.style.display  = isLife ? 'none' : 'block';
+    mobileL.style.display  = isLife ? 'block' : 'none';
+    navCta.style.display   = isLife ? 'none' : '';
+    navSub.textContent     = isLife ? ' — Mayank\'s World' : ' — DevOps Engineer';
+    footerW.style.display  = isLife ? 'none' : '';
+    footerL.style.display  = isLife ? '' : 'none';
+
+    workBtn.classList.toggle('active', !isLife);
+    lifeBtn.classList.toggle('active', isLife);
+    workBtn.setAttribute('aria-pressed', String(!isLife));
+    lifeBtn.setAttribute('aria-pressed', String(isLife));
+
+    window.scrollTo({top: 0, behavior: 'smooth'});
+
+    if (isLife) {
+      loadStories();
+      loadLifeMedium();
+    }
+  }
+
+  /* Restore saved mode */
+  var savedMode = localStorage.getItem('siteMode') || 'work';
+  setMode(savedMode);
+
+  workBtn.addEventListener('click', function() { setMode('work'); });
+  lifeBtn.addEventListener('click', function() { setMode('life'); });
+
+  /* ── Hamburger ── */
+  var hamburger = document.getElementById('nav-hamburger');
+  var mobileMenu = document.getElementById('nav-mobile-menu');
+  function closeMenu() {
+    hamburger.classList.remove('open'); mobileMenu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true');
+  }
+  hamburger.addEventListener('click', function() {
+    var open = mobileMenu.classList.contains('open');
+    if (open) { closeMenu(); } else {
+      hamburger.classList.add('open'); mobileMenu.classList.add('open');
+      hamburger.setAttribute('aria-expanded','true'); mobileMenu.setAttribute('aria-hidden','false');
+    }
+  });
+  mobileMenu.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { closeMenu(); closeStory(); } });
+
+  /* ── Back to top ── */
+  var topBtn = document.getElementById('goTopBtn');
+  window.addEventListener('scroll', function() { topBtn.classList.toggle('visible', window.scrollY > 400); });
+  topBtn.addEventListener('click', function() { window.scrollTo({top:0, behavior:'smooth'}); });
+
+  /* ── Project filter ── */
+  document.querySelectorAll('.filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var filter = btn.dataset.filter;
+      document.querySelectorAll('.project-card').forEach(function(card) {
+        card.classList.toggle('hidden', filter !== 'all' && !(card.dataset.tags||'').includes(filter));
+      });
+    });
+  });
+
+  /* ── Scroll reveal ── */
+  var revealEls = document.querySelectorAll('.project-card, .about-text, .blog-card, .contact-link, .hobby-card');
   var io = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
       if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
     });
-  }, { threshold: 0.1 });
-  els.forEach(function(el) { el.classList.add('reveal'); io.observe(el); });
-})();
+  }, { threshold: 0.08 });
+  revealEls.forEach(function(el) { el.classList.add('reveal'); io.observe(el); });
+
+  /* ══════════════════════════════════════════════════
+     STORIES — load from stories.json
+     ══════════════════════════════════════════════════ */
+  var storiesLoaded = false;
+
+  function loadStories() {
+    if (storiesLoaded) return;
+    fetch('/stories.json?v=' + Date.now())
+      .then(function(r) { return r.json(); })
+      .then(function(stories) {
+        storiesLoaded = true;
+        var grid = document.getElementById('stories-grid');
+        var countEl = document.getElementById('story-count');
+        if (countEl) countEl.textContent = String(stories.length).padStart(2,'0');
+        if (!stories.length) { grid.innerHTML = '<p style="color:var(--fg3);font-family:var(--mono);font-size:13px;">No stories yet — coming soon.</p>'; return; }
+
+        grid.innerHTML = stories.map(function(s, i) {
+          var bg = s.image
+            ? 'style="background-image:url(' + s.image + ');background-size:cover;background-position:center"'
+            : 'style="background:' + (s.placeholder_color || '#111') + '"';
+          return '<button class="story-card reveal" data-index="' + i + '" aria-label="Read story: ' + escHtml(s.title) + '" ' + bg + '>'
+            + '<div class="story-card-overlay">'
+            + '<div class="story-card-cat">' + escHtml(s.category || '') + '</div>'
+            + '<div class="story-card-title">' + escHtml(s.title) + '</div>'
+            + '<div class="story-card-caption">' + escHtml(s.caption) + '</div>'
+            + '</div></button>';
+        }).join('');
+
+        /* Reveal animation */
+        grid.querySelectorAll('.story-card').forEach(function(el) { io.observe(el); });
+
+        /* Click handlers */
+        grid.querySelectorAll('.story-card').forEach(function(btn) {
+          btn.addEventListener('click', function() { openStory(stories[parseInt(btn.dataset.index)]); });
+        });
+
+        /* Store for lightbox nav */
+        window._stories = stories;
+      })
+      .catch(function() {
+        document.getElementById('stories-grid').innerHTML = '<p style="color:var(--fg3);font-family:var(--mono);font-size:13px;">Could not load stories.</p>';
+      });
+  }
+
+  /* ── Story lightbox ── */
+  var overlay = document.getElementById('story-overlay');
+  var overlayBg = document.getElementById('story-overlay-bg');
+  var storyContent = document.getElementById('story-content');
+
+  function openStory(s) {
+    var html = '<div class="story-hero" style="background-image:url(' + (s.image || '') + ');background-color:' + (s.placeholder_color || '#111') + '"></div>'
+      + '<div class="story-body">'
+      + '<div class="story-meta"><span>' + escHtml(s.location || '') + '</span><span>' + escHtml(s.date || '') + '</span></div>'
+      + '<h1 class="story-title">' + escHtml(s.title) + '</h1>';
+
+    (s.story || []).forEach(function(block) {
+      if (block.type === 'text') {
+        html += '<p class="story-para">' + escHtml(block.content) + '</p>';
+      } else if (block.type === 'pullquote') {
+        html += '<blockquote class="story-pullquote">' + escHtml(block.content) + '</blockquote>';
+      }
+    });
+
+    html += '<div class="story-links">';
+    if (s.instagram_url) {
+      html += '<a href="' + escHtml(s.instagram_url) + '" target="_blank" rel="noopener noreferrer" class="story-ext-link story-insta">&#8599; View on Instagram</a>';
+    }
+    if (s.medium_url) {
+      html += '<a href="' + escHtml(s.medium_url) + '" target="_blank" rel="noopener noreferrer" class="story-ext-link story-medium">&#8599; Read on Medium</a>';
+    }
+    html += '</div></div>';
+
+    storyContent.innerHTML = html;
+    overlay.setAttribute('aria-hidden', 'false');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('story-close').focus();
+  }
+
+  function closeStory() {
+    overlay.setAttribute('aria-hidden', 'true');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('story-close').addEventListener('click', closeStory);
+  overlayBg.addEventListener('click', closeStory);
+
+  /* ══════════════════════════════════════════════════
+     LIFE MEDIUM FEED — personal posts only
+     ══════════════════════════════════════════════════ */
+  var lifeMediumLoaded = false;
+
+  function loadLifeMedium() {
+    if (lifeMediumLoaded) return;
+    lifeMediumLoaded = true;
+    var container = document.getElementById('life-medium-feed');
+
+    fetch('/medium-personal.json?v=' + Date.now())
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (!data.posts || data.posts.length === 0) {
+          container.innerHTML = '<div class="feed-empty-box"><div class="feed-empty-icon">✍️</div><div class="feed-empty-body"><h3>No personal posts yet</h3><p>Personal writing tagged "Personal" on Medium will appear here.</p><a href="https://medium.com/@mayankrajputofficial" target="_blank" rel="noopener noreferrer">Follow on Medium &rarr;</a></div></div>';
+          return;
+        }
+        var html = '<div class="post-list">';
+        data.posts.forEach(function(post) {
+          html += '<a href="' + escHtml(post.url) + '" target="_blank" rel="noopener noreferrer" class="post-item">'
+            + '<div class="post-date">' + escHtml(post.date) + '</div>'
+            + '<div class="post-title-wrap"><div class="post-title">' + escHtml(post.title) + '</div>'
+            + (post.excerpt ? '<div class="post-excerpt">' + escHtml(post.excerpt) + '</div>' : '')
+            + '</div><div class="post-arrow">&rarr;</div></a>';
+        });
+        html += '</div>';
+        container.innerHTML = html;
+      })
+      .catch(function() {
+        container.innerHTML = '<p style="font-family:var(--mono);font-size:13px;color:var(--fg3);">Could not load posts. <a href="https://medium.com/@mayankrajputofficial" style="color:var(--life-accent)" target="_blank">Read on Medium &rarr;</a></p>';
+      });
+  }
+
+  function escHtml(s) {
+    return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+}); // DOMContentLoaded
 </script>
 
 </body>
