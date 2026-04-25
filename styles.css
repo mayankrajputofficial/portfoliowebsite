@@ -230,10 +230,15 @@ section {
   border-radius: 50%;
   padding: 5px;
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
-  /* Removed the 1px var(--border) shadow, kept the soft glow */
+  
+  /* The fixed shadow with NO 1px border */
   box-shadow: 0 12px 48px rgba(37,99,235,0.22);
   flex-shrink: 0;
-  transform: translateZ(0); /* Forces smooth rendering */
+
+  /* Anti-aliasing hacks to force perfectly smooth edges */
+  outline: 1px solid transparent;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 .hero-photo {
   width: 100%;
@@ -1149,7 +1154,12 @@ nav {
 }
 .life-ring {
   background: linear-gradient(135deg, var(--life-accent), var(--life-accent2)) !important;
-  box-shadow: 0 0 0 1px var(--border), 0 12px 48px rgba(245,158,11,0.25) !important;
+  
+  /* The fixed shadow with NO 1px border */
+  box-shadow: 0 12px 48px rgba(245,158,11,0.25) !important;
+  
+  /* Force smoothing here too */
+  outline: 1px solid transparent !important;
 }
 .life-tag { border-color: rgba(245,158,11,0.3) !important; }
 .life-dot { background: var(--life-accent) !important; }
