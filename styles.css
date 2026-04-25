@@ -14,7 +14,7 @@
   --accent2:     #1d4ed8;
   --border:      #e2ddd8;
   --white:       #ffffff;
-  --btn-bg:      #111318;
+  --btn-bg:      #2563eb;
   --btn-text:    #ffffff;
   --card-shadow: 0 2px 6px rgba(0,0,0,.10), 0 8px 24px rgba(0,0,0,.08);
   --sans: 'Plus Jakarta Sans', system-ui, sans-serif;
@@ -230,8 +230,10 @@ section {
   border-radius: 50%;
   padding: 5px;
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
-  box-shadow: 0 0 0 1px var(--border), 0 12px 48px rgba(37,99,235,0.22);
+  /* Removed the 1px var(--border) shadow, kept the soft glow */
+  box-shadow: 0 12px 48px rgba(37,99,235,0.22);
   flex-shrink: 0;
+  transform: translateZ(0); /* Forces smooth rendering */
 }
 .hero-photo {
   width: 100%;
@@ -717,7 +719,8 @@ footer a:hover { color: var(--accent); }
 }
 .life-ring {
   background: linear-gradient(135deg, var(--life-accent), var(--life-accent2)) !important;
-  box-shadow: 0 0 0 1px var(--border), 0 12px 48px rgba(245,158,11,0.2) !important;
+  /* Removed the 1px var(--border) shadow here too */
+  box-shadow: 0 12px 48px rgba(245,158,11,0.25) !important;
 }
 .life-tag { border-color: rgba(245,158,11,0.3) !important; }
 .life-dot { background: var(--life-accent) !important; }
@@ -1062,7 +1065,12 @@ nav {
    HERO BACKGROUNDS
    ══════════════════════════════════════════════════ */
 
-/* Work mode: network/nodes background */
+/* Force a dark base behind the images so the fade never looks washed out */
+#intro, #life-intro, #life-stories {
+  background-color: #0f1117; 
+}
+
+   /* Work mode: network/nodes background */
 #intro { position: relative; overflow: hidden; }
 #intro .section-inner { position: relative; z-index: 1; }
 #intro::before {
@@ -1073,7 +1081,7 @@ nav {
   background-position: center;
   filter: brightness(0.12) saturate(0.7) hue-rotate(10deg);
   opacity: 0;
-  animation: bgFadeIn 1.4s ease 0.1s forwards;
+  animation: bgFadeIn 1.5s ease 0.1s forwards;
 }
 
 /* Life mode: Spiti bike photo as hero background */
@@ -1091,7 +1099,7 @@ nav {
   transform: scale(1.04);
   opacity: 0;
   transition: opacity 1.2s ease, transform 8s ease;
-  animation: bgFadeIn 3s ease 0.3s forwards;
+  animation: bgFadeIn 1.5s ease 0.3s forwards;
 }
 #life-intro:hover::before { transform: scale(1.0); }
 @keyframes bgFadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -1109,7 +1117,7 @@ nav {
   background-position: center;
   filter: brightness(0.12) saturate(0.6);
   opacity: 0;
-  animation: bgFadeIn 3s ease 0.4s forwards;
+  animation: bgFadeIn 1.5s ease 0.4s forwards;
 }
 #life-stories .section-inner { position: relative; z-index: 1; }
 
