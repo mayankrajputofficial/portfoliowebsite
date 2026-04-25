@@ -1061,6 +1061,21 @@ nav {
 @keyframes slideOutToLeft   { from { opacity:1; transform: translateX(0); } to { opacity:0; transform: translateX(-40px); } }
 @keyframes slideOutToRight  { from { opacity:1; transform: translateX(0); } to { opacity:0; transform: translateX(40px);  } }
 
+/* Prevents the page from doubling in height during transitions */
+.mode-exiting {
+  position: absolute !important;
+  top: 64px; /* Anchors it right below your nav bar */
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.mode-entering {
+  position: relative;
+  z-index: 1;
+}
+
 /* ══════════════════════════════════════════════════
    HERO BACKGROUNDS
    ══════════════════════════════════════════════════ */

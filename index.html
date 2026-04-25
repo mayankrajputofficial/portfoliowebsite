@@ -536,7 +536,7 @@ document.addEventListener('DOMContentLoaded', function() {
       outEl.classList.remove('mode-entering');
       inEl.classList.remove('mode-entering');
       void outEl.offsetWidth; // force reflow
-      outEl.classList.add(isLife ? 'mode-exiting' : 'mode-exiting');
+      outEl.classList.add('mode-exiting');
       inEl.classList.add('mode-entering');
       setTimeout(function() {
         outEl.style.display = 'none';
