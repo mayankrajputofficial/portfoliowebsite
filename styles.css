@@ -80,6 +80,9 @@ nav {
 }
 
 .nav-logo {
+  white-space: normal;
+  max-width: 140px;
+  line-height: 1.2;
   font-weight: 800; font-size: 20px; letter-spacing: -0.5px;
   color: var(--fg); text-decoration: none; white-space: nowrap;
   flex-shrink: 0;
@@ -655,6 +658,9 @@ footer a:hover { color: var(--accent); }
 
 /* ── Mobile ── */
 @media (max-width: 860px) {
+  .nav-links-wrapper { min-width: 0; }
+  .nav-right { min-width: 0; overflow: visible; }
+  .nav-logo { white-space: normal; max-width: 130px; line-height: 1.2; }
   nav { height: 56px; }
   /* Hide desktop links, CTA, logo subtitle */
   .nav-links-wrapper { display: none !important; }
@@ -942,6 +948,7 @@ nav {
 .nav-right {
   display: flex; align-items: center; gap: 6px;
   margin-left: auto; flex-shrink: 0;
+  min-width: 0;
 }
 
 /* Links wrapper inside nav-right */
@@ -951,7 +958,7 @@ nav {
   height: 40px;
   overflow: hidden;
   align-items: center;
-  min-width: 240px;
+  min-width: 0px;
 }
 
 /* Both link sets — slide animate */
@@ -1277,6 +1284,10 @@ nav {
    MOBILE — hamburger & responsive nav
    ══════════════════════════════════════════════════ */
 @media (max-width: 860px) {
+  .mode-btn { font-size: 0; padding: 8px; }
+  .mode-btn::before { font-size: 12px; }
+  .mode-btn.mode-work::before { content: '⚙'; }
+  .mode-btn.mode-life::before { content: '✦'; }
   /* Mobile nav drawer rules only — layout handled above */
   .nav-hamburger { display: flex !important; }
 
