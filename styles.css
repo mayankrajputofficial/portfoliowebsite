@@ -153,7 +153,6 @@ section {
 #about, #contact { background: var(--bg2); }
 
 /* ── Hero ── */
-/* hero padding & grid defined in hero-photo block below */
 .hero-eyebrow {
   font-family: var(--mono); font-size: 14px;
   color: var(--accent); letter-spacing: 0.1em;
@@ -223,12 +222,8 @@ section {
   border-radius: 50%;
   padding: 5px;
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
-  
-  /* The fixed shadow with NO 1px border */
   box-shadow: 0 12px 48px rgba(37,99,235,0.22);
   flex-shrink: 0;
-
-  /* Anti-aliasing hacks to force perfectly smooth edges */
   outline: 1px solid transparent;
   backface-visibility: hidden;
   transform: translateZ(0);
@@ -271,6 +266,7 @@ section {
   .hero-photo-ring { width: 72px; height: 72px; padding: 3px; }
   .hero-photo-tag  { font-size: 11px; padding: 4px 12px; }
 }
+
 /* ── About ── */
 .about-text {
   font-size: clamp(16px, 0.8vw + 13px, 19px); line-height: 1.8; color: var(--fg2); max-width: 860px;
@@ -656,246 +652,6 @@ footer a:hover { color: var(--accent); }
   .contact-layout { gap: 40px; }
 }
 
-/* ── Mobile ── */
-@media (max-width: 860px) {
-  .nav-links-wrapper { min-width: 0; }
-  .nav-right { min-width: 0; overflow: visible; }
-  .nav-logo { white-space: normal; max-width: 130px; line-height: 1.2; }
-  nav { height: 56px; }
-  /* Hide desktop links, CTA, logo subtitle */
-  .nav-links-wrapper { display: none !important; }
-  .nav-cta-work, .nav-cta-life, .nav-cta { display: none !important; }
-  .nav-logo span { display: none; }
-  .nav-logo { font-size: 17px; }
-  .theme-toggle { width: 34px; height: 34px; font-size: 16px; margin-right: 0; }
-  .nav-hamburger { display: flex !important; }
-  .mode-pill { margin: 0 8px; }
-  .mode-btn { padding: 5px 10px; font-size: 10px; }
-
-  .ofw-strip { font-size: 12px; }
-  .hero-name { letter-spacing: -1px; }
-  .hero-desc { font-size: 17px; }
-  .blog-cta-inner { flex-direction: column; gap: 32px; }
-  .blog-cards { min-width: 0 !important; width: 100%; }
-  .contact-layout { grid-template-columns: 1fr; gap: 32px; }
-  footer { flex-direction: column; align-items: flex-start; gap: 8px; }
-  .blog-list-item { flex-direction: column; gap: 12px; }
-  .blog-list-arrow { display: none; }
-}
-
-/* ══════════════════════════════════════════════════
-   MODE TOGGLE PILL
-   ══════════════════════════════════════════════════ */
-/* .mode-pill — defined in NAV grid section */
-.mode-btn {
-  font-family: var(--mono); font-size: 11px; font-weight: 700;
-  padding: 6px 14px; border-radius: 16px; border: none;
-  cursor: pointer; transition: all 0.2s; white-space: nowrap;
-  letter-spacing: 0.05em; background: transparent; color: var(--fg3);
-}
-.mode-btn.mode-work.active { background: var(--btn-bg); color: #fff; }
-.mode-btn.mode-life.active {
-  background: linear-gradient(135deg, #f59e0b, #ef4444); color: #fff;
-}
-.mode-btn:not(.active):hover { color: var(--fg); }
-
-@media (max-width: 768px) {
-  .mode-pill { margin-right: 4px; }
-  .mode-btn { padding: 5px 10px; font-size: 10px; }
-}
-
-/* ══════════════════════════════════════════════════
-   LIFE MODE CSS VARIABLES
-   ══════════════════════════════════════════════════ */
-:root { --life-accent: #f59e0b; --life-accent2: #ef4444; }
-
-/* Life hero overrides */
-.life-eyebrow { color: var(--life-accent) !important; }
-.life-name {
-  background: linear-gradient(135deg, var(--life-accent), var(--life-accent2));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.life-ring {
-  background: linear-gradient(135deg, var(--life-accent), var(--life-accent2)) !important;
-  /* Removed the 1px var(--border) shadow here too */
-  box-shadow: 0 12px 48px rgba(245,158,11,0.25) !important;
-}
-.life-tag { border-color: rgba(245,158,11,0.3) !important; }
-.life-dot { background: var(--life-accent) !important; }
-.life-chip { border-color: rgba(245,158,11,0.2) !important; }
-.life-chip:hover { border-color: var(--life-accent) !important; color: var(--life-accent) !important; }
-.life-btn-primary { background: var(--life-accent) !important; color: #000 !important; font-weight: 700; }
-.life-title { border-left-color: var(--life-accent) !important; }
-
-/* Life section alternating bg */
-.life-section-alt { background: var(--bg2); }
-
-/* ── Hobbies grid ── */
-.hobbies-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
-}
-.hobby-card {
-  background: var(--white); border: 1.5px solid var(--border);
-  border-radius: 12px; padding: 24px 20px;
-  display: flex; flex-direction: column; gap: 8px;
-  transition: border-color 0.15s, transform 0.15s;
-}
-.hobby-card:hover { border-color: var(--life-accent); transform: translateY(-3px); }
-.hobby-icon { font-size: 28px; }
-.hobby-name { font-size: 16px; font-weight: 700; color: var(--fg); }
-.hobby-desc { font-size: 13px; color: var(--fg2); line-height: 1.6; flex: 1; }
-.hobby-link {
-  font-family: var(--mono); font-size: 12px; color: var(--life-accent);
-  text-decoration: none; margin-top: 4px;
-}
-.hobby-link:hover { text-decoration: underline; }
-
-/* ── Stories grid ── */
-.stories-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 16px;
-}
-.stories-loading {
-  display: flex; align-items: center; gap: 12px;
-  font-family: var(--mono); font-size: 13px; color: var(--fg3); padding: 36px 0;
-}
-.story-card {
-  aspect-ratio: 4/3; border-radius: 12px; overflow: hidden;
-  position: relative; border: none; cursor: pointer;
-  background: var(--bg2);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.story-card:hover { transform: scale(1.02); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
-.story-card-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);
-  display: flex; flex-direction: column; justify-content: flex-end;
-  padding: 20px; text-align: left;
-}
-.story-card-cat {
-  font-family: var(--mono); font-size: 10px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.12em;
-  color: var(--life-accent); margin-bottom: 6px;
-}
-.story-card-title {
-  font-size: 15px; font-weight: 700; color: #fff;
-  line-height: 1.3; margin-bottom: 4px;
-}
-.story-card-caption { font-size: 12px; color: rgba(255,255,255,0.65); line-height: 1.4; }
-
-/* ── Story lightbox ── */
-.story-overlay {
-  position: fixed; inset: 0; z-index: 1000;
-  display: flex; align-items: flex-start; justify-content: center;
-  opacity: 0; pointer-events: none; transition: opacity 0.25s;
-  overflow-y: auto; padding: 40px 16px;
-}
-.story-overlay.open { opacity: 1; pointer-events: all; }
-.story-overlay-bg {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.88); cursor: pointer;
-}
-.story-article {
-  position: relative; z-index: 1;
-  background: var(--bg); border: 1px solid var(--border);
-  border-radius: 16px; overflow: hidden;
-  max-width: 720px; width: 100%;
-  box-shadow: 0 24px 80px rgba(0,0,0,0.5);
-  transform: translateY(20px); transition: transform 0.25s;
-}
-.story-overlay.open .story-article { transform: translateY(0); }
-.story-close {
-  position: absolute; top: 16px; right: 16px; z-index: 2;
-  width: 36px; height: 36px; border-radius: 50%;
-  background: rgba(0,0,0,0.5); border: none; color: #fff;
-  font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center;
-  transition: background 0.15s;
-}
-.story-close:hover { background: rgba(0,0,0,0.8); }
-.story-hero {
-  width: 100%; aspect-ratio: 16/9;
-  background: #111 center/cover no-repeat;
-}
-.story-body { padding: clamp(24px, 5vw, 48px); }
-.story-meta {
-  display: flex; gap: 20px; margin-bottom: 16px;
-  font-family: var(--mono); font-size: 12px; color: var(--fg3);
-}
-.story-title {
-  font-size: clamp(22px, 4vw, 36px); font-weight: 800;
-  letter-spacing: -0.5px; line-height: 1.15;
-  color: var(--fg); margin-bottom: 28px;
-}
-.story-para {
-  font-size: 17px; line-height: 1.85; color: var(--fg2);
-  margin-bottom: 20px;
-}
-.story-pullquote {
-  border-left: 3px solid var(--life-accent);
-  margin: 28px 0; padding: 4px 0 4px 24px;
-  font-size: 19px; font-style: italic; color: var(--fg);
-  font-weight: 600; line-height: 1.5;
-}
-.story-links {
-  display: flex; gap: 12px; flex-wrap: wrap; margin-top: 36px;
-  padding-top: 24px; border-top: 1px solid var(--border);
-}
-.story-ext-link {
-  font-family: var(--mono); font-size: 13px; font-weight: 600;
-  padding: 10px 20px; border-radius: 8px; text-decoration: none;
-  transition: opacity 0.15s;
-}
-.story-ext-link:hover { opacity: 0.8; }
-.story-insta {
-  background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-  color: #fff;
-}
-.story-medium { background: var(--btn-bg); color: var(--btn-text); }
-
-/* ── Life connect grid ── */
-.life-connect-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 12px;
-}
-.life-connect-card {
-  background: var(--white); border: 1.5px solid var(--border);
-  border-radius: 10px; padding: 18px 20px;
-  text-decoration: none; color: inherit;
-  display: flex; flex-direction: column; gap: 4px;
-  transition: border-color 0.15s, transform 0.15s;
-}
-.life-connect-card:hover { border-color: var(--life-accent); transform: translateY(-2px); }
-.lcc-handle { font-family: var(--mono); font-size: 14px; font-weight: 700; color: var(--life-accent); }
-.lcc-desc { font-size: 13px; color: var(--fg2); }
-.lcc-arrow { font-size: 16px; color: var(--fg3); margin-top: 8px; transition: transform 0.15s; }
-.life-connect-card:hover .lcc-arrow { transform: translateX(4px); }
-
-/* ── Post excerpt (used in life blog) ── */
-.post-excerpt {
-  font-size: 13px; color: var(--fg3); line-height: 1.5; margin-bottom: 7px;
-  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-}
-.feed-empty-box {
-  background: var(--white); border: 1.5px solid var(--border);
-  border-radius: 12px; padding: 40px; display: flex; align-items: flex-start; gap: 20px;
-}
-.feed-empty-icon { font-size: 28px; flex-shrink: 0; opacity: 0.4; }
-.feed-empty-body h3 { font-size: 17px; font-weight: 700; color: var(--fg); margin-bottom: 6px; }
-.feed-empty-body p  { font-size: 14px; color: var(--fg2); line-height: 1.65; margin-bottom: 14px; }
-.feed-empty-body a {
-  font-family: var(--mono); font-size: 13px; color: var(--btn-text);
-  background: var(--life-accent); padding: 8px 18px; border-radius: 7px;
-  text-decoration: none; transition: opacity 0.15s; display: inline-block; color: #000; font-weight: 700;
-}
-.feed-loading {
-  display: flex; align-items: center; gap: 12px; padding: 36px 0;
-  font-family: var(--mono); font-size: 13px; color: var(--fg3);
-}
-
 /* ══════════════════════════════════════════════════
    MODE TOGGLE PILL
    ══════════════════════════════════════════════════ */
@@ -937,6 +693,7 @@ nav {
 .nav-left { display: flex; align-items: center; }
 .nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
 
+/* Logo — shrinks, pushes nothing */
 .nav-logo {
   white-space: nowrap;
   font-weight: 800; font-size: 20px; letter-spacing: -0.5px;
@@ -946,11 +703,13 @@ nav {
 
 /* ── Links wrapper using Grid to overlap without collapsing width ── */
 .nav-links-wrapper {
-  display: grid;
+  display: grid !important;
   height: 40px;
   overflow: hidden;
   align-items: center;
   justify-items: end; /* anchors links to the right */
+  flex: 1;
+  margin-right: 16px;
 }
 
 /* Both link sets — slide animate inside the grid cell */
@@ -980,46 +739,8 @@ nav {
   display: flex; align-items: center;
   background: var(--bg2); border: 1.5px solid var(--border);
   border-radius: 20px; padding: 3px; gap: 2px;
-  flex-shrink: 0; margin: 0;
+  flex-shrink: 0; margin: 0 auto;
 }
-
-/* Right group — links + theme + cta + hamburger */
-.nav-right {
-  display: flex; align-items: center; gap: 6px;
-  margin-left: auto; flex-shrink: 0;
-}
-
-/* Links wrapper inside nav-right */
-.nav-links-wrapper {
-  display: flex;
-  position: relative;
-  height: 40px;
-  overflow: hidden;
-  align-items: center;
-  min-width: max-content;
-}
-
-/* Both link sets — slide animate */
-.nav-links-work,
-.nav-links-life {
-  position: absolute; right: 0;
-  display: flex !important;
-  gap: 2px; align-items: center;
-  transition: transform 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease;
-  will-change: transform, opacity;
-}
-
-[data-mode="work"] .nav-links-work  { transform: translateX(0);    opacity: 1; pointer-events: all; }
-[data-mode="work"] .nav-links-life  { transform: translateX(60px);  opacity: 0; pointer-events: none; }
-[data-mode="life"] .nav-links-life  { transform: translateX(0);    opacity: 1; pointer-events: all; }
-[data-mode="life"] .nav-links-work  { transform: translateX(-60px); opacity: 0; pointer-events: none; }
-
-.nav-links-work a, .nav-links-life a {
-  font-size: 14px; font-weight: 500; color: var(--fg2);
-  text-decoration: none; padding: 7px 11px; border-radius: 6px;
-  transition: color 0.15s, background 0.15s; white-space: nowrap;
-}
-.nav-links-work a:hover, .nav-links-life a:hover { color: var(--fg); background: var(--bg2); }
 
 /* OFW strip — animated between modes */
 .ofw-strip {
@@ -1323,37 +1044,42 @@ nav {
    ══════════════════════════════════════════════════ */
 @media (max-width: 860px) {
   nav { gap: 8px !important; }
+  .nav-left { min-width: 0; }
   
-  /* 1. Compulsory 2-line wrap for the name */
-  .nav-logo { 
-    white-space: normal !important; 
-    max-width: 85px !important; 
-    line-height: 1.15; 
-    font-size: 18px; 
+  /* Compulsory 2-line wrap for the name */
+  .nav-logo {
+    white-space: normal !important;
+    max-width: 85px !important;
+    line-height: 1.15 !important;
+    font-size: 18px !important;
+    display: block;
   }
-  .nav-logo span { display: none; }
+  .nav-logo span { display: none !important; }
   
-  /* 2. Hide text on mode buttons, show only icons to save space */
-  .mode-text { display: none; }
-  .mode-btn { padding: 6px 10px; font-size: 14px; }
-  
+  /* Hide the "Work" and "Life" text, keep only icons */
+  .mode-text { display: none !important; }
+  .mode-btn { padding: 6px 10px !important; font-size: 14px !important; }
+
   /* Hide desktop links and buttons */
   .nav-links-wrapper, .nav-cta-wrapper { display: none !important; }
+  .nav-cta-work, .nav-cta-life, .nav-cta { display: none !important; }
   
   /* Show hamburger */
-  .nav-hamburger { display: flex !important; }
+  .nav-hamburger { display: flex !important; margin-left: 0; }
 
-  /* Mobile menu dropdown */
+  /* Mobile menu — full-width dropdown */
   .nav-mobile-menu {
     position: sticky; top: 64px; z-index: 99;
     background: var(--bg);
     border-bottom: 1px solid var(--border);
     padding: 8px 16px 16px;
     flex-direction: column; gap: 2px;
+    /* Animated open/close */
     max-height: 0; overflow: hidden;
-    transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease, padding 0.3s;
+    transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1),
+                opacity 0.3s ease, padding 0.3s;
     opacity: 0; padding-top: 0; padding-bottom: 0;
-    display: flex !important; 
+    display: flex !important; /* always flex, controlled by max-height */
   }
   .nav-mobile-menu.open {
     max-height: 400px; opacity: 1;
@@ -1375,20 +1101,28 @@ nav {
     background: var(--life-accent); color: #000 !important;
   }
 
+  /* Show/hide correct set of mobile links */
   #mobile-work-links, #mobile-life-links { display: block; }
+
+  /* Hero adjustments */
   .hero { grid-template-columns: 1fr; padding-top: clamp(32px,5vw,56px); }
   .hero-photo-wrap { order: -1; flex-direction: row; gap: 16px; justify-content: flex-start; }
   .hero-photo-ring { width: 72px; height: 72px; padding: 3px; }
   .hero-photo-tag { font-size: 11px; padding: 4px 12px; }
   .hero-name { letter-spacing: -1px; }
   .hero-desc { font-size: 17px; }
+
+  /* Contact layout */
   .contact-layout { grid-template-columns: 1fr; gap: 32px; }
+
+  /* Blog CTA */
   .blog-cta-inner { flex-direction: column; gap: 32px; }
+
+  /* Footer */
   footer { flex-direction: column; align-items: flex-start; gap: 8px; }
 }
 
 @media (max-width: 480px) {
-  .mode-btn { padding: 5px 10px; font-size: 10px; }
   .stories-grid { grid-template-columns: 1fr; }
   .hobbies-grid { grid-template-columns: 1fr 1fr; }
 }
