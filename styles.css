@@ -1042,7 +1042,7 @@ nav {
 /* ══════════════════════════════════════════════════
    MOBILE — hamburger & responsive nav
    ══════════════════════════════════════════════════ */
-@media (max-width: 860px) {
+@media (max-width: 1080px) {
   nav { gap: 8px !important; }
   .nav-left { min-width: 0; }
   
@@ -1150,3 +1150,13 @@ nav {
 #life-stories .section-title { color: #ffffff !important; }
 #life-stories .about-text { color: rgba(255, 255, 255, 0.85) !important; }
 #life-stories .section-count { color: rgba(255, 255, 255, 0.6) !important; }
+
+/* ══════════════════════════════════════════════════
+   DESKTOP SAFETY OVERRIDES (Above 1080px)
+   ══════════════════════════════════════════════════ */
+@media (min-width: 1081px) {
+  .nav-links-wrapper {
+    display: grid !important; 
+    flex: 1;
+  }
+}
