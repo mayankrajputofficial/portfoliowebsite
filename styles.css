@@ -948,7 +948,6 @@ nav {
 .nav-right {
   display: flex; align-items: center; gap: 6px;
   margin-left: auto; flex-shrink: 0;
-  min-width: 0;
 }
 
 /* Links wrapper inside nav-right */
@@ -958,7 +957,7 @@ nav {
   height: 40px;
   overflow: hidden;
   align-items: center;
-  min-width: 0px;
+  min-width: max-content;
 }
 
 /* Both link sets — slide animate */
@@ -1064,7 +1063,7 @@ nav {
 #intro::before {
   content: '';
   position: absolute; inset: 0; z-index: 0;
-  background-image: url('/images/bg-network-web.jpg');
+  background-image: url('/images/backgrounds/bg-network-web.jpg');
   background-size: cover;
   background-position: center;
   filter: brightness(0.12) saturate(0.7) hue-rotate(10deg);
@@ -1080,7 +1079,7 @@ nav {
 #life-intro::before {
   content: '';
   position: absolute; inset: 0; z-index: 0;
-  background-image: url('/images/spiti-bike-web.jpg');
+  background-image: url('/images/backgrounds/spiti-bike-web.jpg');
   background-size: cover;
   background-position: center 40%;
   filter: brightness(0.22) saturate(0.8);
@@ -1100,7 +1099,7 @@ nav {
 #life-stories::before {
   content: '';
   position: absolute; inset: 0; z-index: 0;
-  background-image: url('/images/spiti-river-web.jpg');
+  background-image: url('/images/backgrounds/spiti-river-web.jpg');
   background-size: cover;
   background-position: center;
   filter: brightness(0.12) saturate(0.6);
