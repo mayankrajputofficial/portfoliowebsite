@@ -1118,6 +1118,8 @@ nav {
     transform: translateX(30px) !important; /* Slides them right into the void */
     flex: 0 !important;
   }
+
+  .nav-right { min-width: 0; overflow: visible; }
   
   /* 4. SLIDE ANIMATION: Bring hamburger in from the right */
   .nav-hamburger { 
