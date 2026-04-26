@@ -1042,44 +1042,103 @@ nav {
 /* ══════════════════════════════════════════════════
    MOBILE — hamburger & responsive nav
    ══════════════════════════════════════════════════ */
-@media (max-width: 1080px) {
-  nav { gap: 8px !important; }
-  .nav-left { min-width: 0; }
+
+@media (max-width: 480px) {
+  .stories-grid { grid-template-columns: 1fr; }
+  .hobbies-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ══════════════════════════════════════════════════
+   RESIZE ANIMATIONS
+   ══════════════════════════════════════════════════ */
+/* Apply smooth transitions to the nav elements so they slide on resize */
+.nav-links-wrapper, .nav-cta-wrapper, .nav-hamburger, .nav-logo, .mode-btn {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* ══════════════════════════════════════════════════
+   DESKTOP SAFETY OVERRIDES (Above 1150px)
+   ══════════════════════════════════════════════════ */
+@media (min-width: 1151px) {
+  .nav-links-wrapper {
+    display: grid !important; 
+    flex: 1;
+    opacity: 1;
+    max-width: 800px; /* Allows it to take up space */
+    transform: translateX(0);
+  }
+  .nav-cta-wrapper {
+    display: flex !important;
+    opacity: 1;
+    max-width: 200px;
+    transform: translateX(0);
+  }
   
-  /* Compulsory 2-line wrap for the name */
-  .nav-logo {
-    white-space: normal !important;
-    max-width: 85px !important;
-    line-height: 1.15 !important;
-    font-size: 18px !important;
+  /* Keep hamburger in the layout but hide it off to the right */
+  .nav-hamburger {
+    display: flex !important;
+    opacity: 0;
+    visibility: hidden;
+    width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    transform: translateX(20px);
+  }
+}
+
+/* ══════════════════════════════════════════════════
+   MOBILE NAV FIXES (Below 1150px)
+   ══════════════════════════════════════════════════ */
+@media (max-width: 1150px) {
+  nav { gap: 8px !important; }
+  
+  /* 1. Compulsory 2-line wrap for the name */
+  .nav-logo { 
+    white-space: normal !important; 
+    max-width: 85px !important; 
+    line-height: 1.15 !important; 
+    font-size: 18px !important; 
     display: block;
   }
   .nav-logo span { display: none !important; }
   
-  /* Hide the "Work" and "Life" text, keep only icons */
+  /* 2. Hide text on mode buttons, show only icons */
   .mode-text { display: none !important; }
   .mode-btn { padding: 6px 10px !important; font-size: 14px !important; }
-
-  /* Hide desktop links and buttons */
-  .nav-links-wrapper, .nav-cta-wrapper { display: none !important; }
-  .nav-cta-work, .nav-cta-life, .nav-cta { display: none !important; }
   
-  /* Show hamburger */
-  .nav-hamburger { display: flex !important; margin-left: 0; }
+  /* 3. SLIDE ANIMATION: Shrink, fade, and push desktop links to the right */
+  .nav-links-wrapper, .nav-cta-wrapper {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    max-width: 0 !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: translateX(30px) !important; /* Slides them right into the void */
+    flex: 0 !important;
+  }
+  
+  /* 4. SLIDE ANIMATION: Bring hamburger in from the right */
+  .nav-hamburger { 
+    display: flex !important; 
+    opacity: 1 !important;
+    visibility: visible !important;
+    width: 38px !important;
+    transform: translateX(0) !important;
+  }
 
-  /* Mobile menu — full-width dropdown */
+  /* Mobile menu dropdown (Unchanged) */
   .nav-mobile-menu {
     position: sticky; top: 64px; z-index: 99;
     background: var(--bg);
     border-bottom: 1px solid var(--border);
     padding: 8px 16px 16px;
     flex-direction: column; gap: 2px;
-    /* Animated open/close */
     max-height: 0; overflow: hidden;
-    transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1),
-                opacity 0.3s ease, padding 0.3s;
+    transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease, padding 0.3s;
     opacity: 0; padding-top: 0; padding-bottom: 0;
-    display: flex !important; /* always flex, controlled by max-height */
+    display: flex !important; 
   }
   .nav-mobile-menu.open {
     max-height: 400px; opacity: 1;
@@ -1101,30 +1160,16 @@ nav {
     background: var(--life-accent); color: #000 !important;
   }
 
-  /* Show/hide correct set of mobile links */
   #mobile-work-links, #mobile-life-links { display: block; }
-
-  /* Hero adjustments */
   .hero { grid-template-columns: 1fr; padding-top: clamp(32px,5vw,56px); }
   .hero-photo-wrap { order: -1; flex-direction: row; gap: 16px; justify-content: flex-start; }
   .hero-photo-ring { width: 72px; height: 72px; padding: 3px; }
   .hero-photo-tag { font-size: 11px; padding: 4px 12px; }
   .hero-name { letter-spacing: -1px; }
   .hero-desc { font-size: 17px; }
-
-  /* Contact layout */
   .contact-layout { grid-template-columns: 1fr; gap: 32px; }
-
-  /* Blog CTA */
   .blog-cta-inner { flex-direction: column; gap: 32px; }
-
-  /* Footer */
   footer { flex-direction: column; align-items: flex-start; gap: 8px; }
-}
-
-@media (max-width: 480px) {
-  .stories-grid { grid-template-columns: 1fr; }
-  .hobbies-grid { grid-template-columns: 1fr 1fr; }
 }
 
 /* ══════════════════════════════════════════════════
@@ -1151,12 +1196,3 @@ nav {
 #life-stories .about-text { color: rgba(255, 255, 255, 0.85) !important; }
 #life-stories .section-count { color: rgba(255, 255, 255, 0.6) !important; }
 
-/* ══════════════════════════════════════════════════
-   DESKTOP SAFETY OVERRIDES (Above 1080px)
-   ══════════════════════════════════════════════════ */
-@media (min-width: 1081px) {
-  .nav-links-wrapper {
-    display: grid !important; 
-    flex: 1;
-  }
-}
