@@ -918,30 +918,69 @@ footer a:hover { color: var(--accent); }
 .mode-btn:not(.active):hover { color: var(--fg); }
 
 /* ══════════════════════════════════════════════════
-   NAV LAYOUT — logo | toggle(centre) | right-group
-   HTML: .nav-left | .mode-pill | .nav-right
+   NAV LAYOUT — Perfectly Centered & Symmetrical
    ══════════════════════════════════════════════════ */
 nav {
   display: flex !important;
   align-items: center;
+  justify-content: space-between;
   height: 64px;
   padding: 0 clamp(16px,5vw,64px);
-  gap: 0;
+  gap: 16px;
 }
 
-/* Logo — shrinks, pushes nothing */
-.nav-left {
-  display: flex; align-items: center; flex-shrink: 0;
-  margin-right: auto;
+.nav-left, .nav-right {
+  flex: 1; /* Forces left and right to be equal width, perfectly centering the pill */
+  min-width: 0;
 }
 
-/* Toggle — stays in natural flow, centred by auto margins */
+.nav-left { display: flex; align-items: center; }
+.nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+
+.nav-logo {
+  white-space: nowrap;
+  font-weight: 800; font-size: 20px; letter-spacing: -0.5px;
+  color: var(--fg); text-decoration: none;
+}
+.nav-logo span { color: var(--fg3); font-weight: 400; font-size: 15px; }
+
+/* ── Links wrapper using Grid to overlap without collapsing width ── */
+.nav-links-wrapper {
+  display: grid;
+  height: 40px;
+  overflow: hidden;
+  align-items: center;
+  justify-items: end; /* anchors links to the right */
+}
+
+/* Both link sets — slide animate inside the grid cell */
+.nav-links-work,
+.nav-links-life {
+  grid-area: 1 / 1;
+  display: flex !important;
+  gap: 4px; align-items: center;
+  transition: transform 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease;
+  will-change: transform, opacity;
+}
+
+[data-mode="work"] .nav-links-work  { transform: translateX(0);    opacity: 1; pointer-events: all; }
+[data-mode="work"] .nav-links-life  { transform: translateX(60px);  opacity: 0; pointer-events: none; }
+[data-mode="life"] .nav-links-life  { transform: translateX(0);    opacity: 1; pointer-events: all; }
+[data-mode="life"] .nav-links-work  { transform: translateX(-60px); opacity: 0; pointer-events: none; }
+
+.nav-links-work a, .nav-links-life a {
+  font-size: 14px; font-weight: 500; color: var(--fg2);
+  text-decoration: none; padding: 7px 11px; border-radius: 6px;
+  transition: color 0.15s, background 0.15s; white-space: nowrap;
+}
+.nav-links-work a:hover, .nav-links-life a:hover { color: var(--fg); background: var(--bg2); }
+
+/* Toggle — dead centre */
 .mode-pill {
   display: flex; align-items: center;
   background: var(--bg2); border: 1.5px solid var(--border);
   border-radius: 20px; padding: 3px; gap: 2px;
-  flex-shrink: 0;
-  margin: 0 auto;
+  flex-shrink: 0; margin: 0;
 }
 
 /* Right group — links + theme + cta + hamburger */
@@ -1283,26 +1322,38 @@ nav {
    MOBILE — hamburger & responsive nav
    ══════════════════════════════════════════════════ */
 @media (max-width: 860px) {
-  .mode-btn { font-size: 0; padding: 8px; }
-  .mode-btn::before { font-size: 12px; }
-  .mode-btn.mode-work::before { content: '⚙'; }
-  .mode-btn.mode-life::before { content: '✦'; }
-  /* Mobile nav drawer rules only — layout handled above */
+  nav { gap: 8px !important; }
+  
+  /* 1. Compulsory 2-line wrap for the name */
+  .nav-logo { 
+    white-space: normal !important; 
+    max-width: 85px !important; 
+    line-height: 1.15; 
+    font-size: 18px; 
+  }
+  .nav-logo span { display: none; }
+  
+  /* 2. Hide text on mode buttons, show only icons to save space */
+  .mode-text { display: none; }
+  .mode-btn { padding: 6px 10px; font-size: 14px; }
+  
+  /* Hide desktop links and buttons */
+  .nav-links-wrapper, .nav-cta-wrapper { display: none !important; }
+  
+  /* Show hamburger */
   .nav-hamburger { display: flex !important; }
 
-  /* Mobile menu — full-width dropdown */
+  /* Mobile menu dropdown */
   .nav-mobile-menu {
     position: sticky; top: 64px; z-index: 99;
     background: var(--bg);
     border-bottom: 1px solid var(--border);
     padding: 8px 16px 16px;
     flex-direction: column; gap: 2px;
-    /* Animated open/close */
     max-height: 0; overflow: hidden;
-    transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1),
-                opacity 0.3s ease, padding 0.3s;
+    transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease, padding 0.3s;
     opacity: 0; padding-top: 0; padding-bottom: 0;
-    display: flex !important; /* always flex, controlled by max-height */
+    display: flex !important; 
   }
   .nav-mobile-menu.open {
     max-height: 400px; opacity: 1;
@@ -1324,24 +1375,15 @@ nav {
     background: var(--life-accent); color: #000 !important;
   }
 
-  /* Show/hide correct set of mobile links */
   #mobile-work-links, #mobile-life-links { display: block; }
-
-  /* Hero adjustments */
   .hero { grid-template-columns: 1fr; padding-top: clamp(32px,5vw,56px); }
   .hero-photo-wrap { order: -1; flex-direction: row; gap: 16px; justify-content: flex-start; }
   .hero-photo-ring { width: 72px; height: 72px; padding: 3px; }
   .hero-photo-tag { font-size: 11px; padding: 4px 12px; }
   .hero-name { letter-spacing: -1px; }
   .hero-desc { font-size: 17px; }
-
-  /* Contact layout */
   .contact-layout { grid-template-columns: 1fr; gap: 32px; }
-
-  /* Blog CTA */
   .blog-cta-inner { flex-direction: column; gap: 32px; }
-
-  /* Footer */
   footer { flex-direction: column; align-items: flex-start; gap: 8px; }
 }
 
