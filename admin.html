@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin — techymayank.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="admin.css"/>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="admin-login" class="admin-screen">
+  <div class="login-box">
+    <div class="login-logo">techymayank.com</div>
+    <h1 class="login-title">Admin Panel</h1>
+    <p class="login-sub">Sign in to manage posts and stories</p>
+    <form id="login-form" autocomplete="off">
+      <div class="field-group">
+        <label class="field-label">Username</label>
+        <input type="text" id="login-user" class="field-input" autocomplete="username" placeholder="admin"/>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Password</label>
+        <input type="password" id="login-pass" class="field-input" autocomplete="current-password" placeholder="••••••••"/>
+      </div>
+      <div class="login-error" id="login-error"></div>
+      <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">Sign in &rarr;</button>
+    </form>
+  </div>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div id="admin-dashboard" class="admin-screen" style="display:none">
+
+  <header class="admin-header">
+    <a href="/" class="admin-back">&larr; Back to site</a>
+    <div class="admin-header-title">Admin Panel</div>
+    <button id="admin-logout" class="btn-outline">Sign out</button>
+  </header>
+
+  <div class="admin-body">
+
+    <!-- TAB NAV -->
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-tab="posts">Work Posts</button>
+      <button class="admin-tab" data-tab="stories">Life Stories</button>
+    </div>
+
+    <!-- TOAST -->
+    <div id="admin-toast" class="admin-toast"></div>
+
+    <!-- ══ WORK POSTS TAB ══ -->
+    <div class="tab-panel" id="tab-posts">
+      <div class="panel-header">
+        <h2 class="panel-title">On-Site Blog Posts</h2>
+        <button class="btn-primary" id="btn-new-post">+ New Post</button>
+      </div>
+
+      <!-- Post list -->
+      <div id="posts-list" class="item-list"></div>
+
+      <!-- Post editor -->
+      <div id="post-editor" class="editor-panel" style="display:none">
+        <div class="editor-header">
+          <h3 id="post-editor-title">New Post</h3>
+          <button class="btn-ghost" id="btn-cancel-post">&times; Cancel</button>
+        </div>
+        <div class="editor-fields">
+          <div class="field-group">
+            <label class="field-label">Title *</label>
+            <input type="text" id="post-title" class="field-input" placeholder="Post title"/>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Slug (URL) *</label>
+            <input type="text" id="post-slug" class="field-input" placeholder="my-post-title"/>
+            <div class="field-hint">Will be served at /posts/[slug].html</div>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Date</label>
+            <input type="text" id="post-date" class="field-input" placeholder="Apr 2026"/>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Tags (comma separated)</label>
+            <input type="text" id="post-tags" class="field-input" placeholder="Docker, Nginx, Linux"/>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Description (shown on blog listing)</label>
+            <textarea id="post-desc" class="field-input field-textarea" rows="2" placeholder="One or two sentence summary"></textarea>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Content (Markdown-style — use ## for headings, ``` for code blocks)</label>
+            <textarea id="post-content" class="field-input field-textarea field-textarea--tall" rows="16" placeholder="Write your post content here...&#10;&#10;## Section Heading&#10;&#10;Your paragraph text here.&#10;&#10;```&#10;some code here&#10;```"></textarea>
+          </div>
+        </div>
+        <div class="editor-actions">
+          <button class="btn-primary" id="btn-save-post">Save Post</button>
+          <button class="btn-ghost" id="btn-cancel-post2">&times; Cancel</button>
+        </div>
+        <div class="editor-note">
+          <strong>Note:</strong> Saving generates the post JSON. You still need to create the actual HTML file at
+          <code>/posts/[slug].html</code> using the post template. A copy button will appear after saving.
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ LIFE STORIES TAB ══ -->
+    <div class="tab-panel" id="tab-stories" style="display:none">
+      <div class="panel-header">
+        <h2 class="panel-title">Life Stories</h2>
+        <button class="btn-primary" id="btn-new-story">+ New Story</button>
+      </div>
+
+      <!-- Story list -->
+      <div id="stories-list" class="item-list"></div>
+
+      <!-- Story editor -->
+      <div id="story-editor" class="editor-panel" style="display:none">
+        <div class="editor-header">
+          <h3 id="story-editor-title">New Story</h3>
+          <button class="btn-ghost" id="btn-cancel-story">&times; Cancel</button>
+        </div>
+        <div class="editor-fields">
+          <div class="field-row">
+            <div class="field-group">
+              <label class="field-label">Story ID *</label>
+              <input type="text" id="story-id" class="field-input" placeholder="story-005"/>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Category</label>
+              <input type="text" id="story-category" class="field-input" placeholder="travel, bikes, fitness, photography"/>
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Title *</label>
+            <input type="text" id="story-title" class="field-input" placeholder="Story title"/>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Caption (shown on grid card)</label>
+            <input type="text" id="story-caption" class="field-input" placeholder="One evocative line"/>
+          </div>
+          <div class="field-row">
+            <div class="field-group">
+              <label class="field-label">Location</label>
+              <input type="text" id="story-location" class="field-input" placeholder="Spiti Valley, HP"/>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Date</label>
+              <input type="text" id="story-date" class="field-input" placeholder="April 2026"/>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-group">
+              <label class="field-label">Image path</label>
+              <input type="text" id="story-image" class="field-input" placeholder="/images/photography/photo.jpg"/>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Placeholder colour</label>
+              <input type="text" id="story-color" class="field-input" placeholder="#1a0a00"/>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-group">
+              <label class="field-label">Instagram URL</label>
+              <input type="text" id="story-insta" class="field-input" placeholder="https://instagram.com/p/..."/>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Medium URL (optional)</label>
+              <input type="text" id="story-medium" class="field-input" placeholder="https://medium.com/..."/>
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Story Content</label>
+            <div id="story-blocks" class="story-blocks"></div>
+            <div class="story-block-actions">
+              <button class="btn-outline btn-sm" data-add="text">+ Text paragraph</button>
+              <button class="btn-outline btn-sm" data-add="pullquote">+ Pull quote</button>
+            </div>
+          </div>
+        </div>
+        <div class="editor-actions">
+          <button class="btn-primary" id="btn-save-story">Save Story</button>
+          <button class="btn-ghost" id="btn-cancel-story2">&times; Cancel</button>
+        </div>
+        <div class="editor-note" id="story-copy-area" style="display:none">
+          <strong>Copy this into your stories.json:</strong>
+          <pre id="story-json-output" class="json-output"></pre>
+          <button class="btn-outline btn-sm" id="btn-copy-json">Copy JSON</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /admin-body -->
+</div><!-- /admin-dashboard -->
+
+<script src="admin.js"></script>
+</body>
+</html>
