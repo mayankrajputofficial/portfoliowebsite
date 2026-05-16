@@ -7,48 +7,106 @@
   <title>Blog — Mayank Rajput</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" type="image/x-icon" href="/images/icons/favicon.ico"/>
   <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32.png"/>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/favicon-180.png"/>
   <style>
-    /* ── Blog page hero ── */
-    .blog-hero {
-      padding: clamp(48px,6vw,80px) clamp(20px,5vw,64px) clamp(32px,4vw,48px);
-      border-bottom: 1px solid var(--border);
+    /* ══ Blog page overrides — inherits variables from styles.css ══ */
+
+    /* ── Blog nav (shared with portfolio) ── */
+    .blog-nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center;
+      height: 64px;
+      padding: 0 clamp(16px,5vw,56px);
+      background: rgba(8,11,16,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      gap: 20px;
     }
-    .blog-hero-inner { max-width: 1200px; margin: 0 auto; }
+    .blog-nav-logo {
+      font-family: var(--display);
+      font-size: 22px; letter-spacing: 2px;
+      color: var(--fg); text-decoration: none;
+      flex-shrink: 0;
+    }
+    .blog-nav-links {
+      display: flex; align-items: center; gap: 0; flex: 1;
+      justify-content: center;
+    }
+    .blog-nav-links a {
+      font-family: var(--condensed);
+      font-size: 13px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(155,163,174,0.8);
+      text-decoration: none; padding: 8px 16px;
+      transition: color 0.15s;
+    }
+    .blog-nav-links a:hover { color: var(--fg); }
+    .blog-nav-links a.active { color: var(--accent); }
+    .blog-nav-right {
+      display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+    }
+    .blog-nav-cta {
+      font-family: var(--condensed);
+      font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      background: var(--btn-bg); color: var(--btn-text);
+      padding: 8px 18px; text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .blog-nav-cta:hover { opacity: 0.85; }
+
+    /* ── Blog hero ── */
+    .blog-hero {
+      padding: clamp(56px,7vw,96px) clamp(20px,5vw,56px) clamp(40px,5vw,64px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      max-width: 1200px; margin: 0 auto;
+    }
     .blog-eyebrow {
       font-family: var(--mono); font-size: 12px; color: var(--accent);
-      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px;
+      text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .blog-eyebrow::before {
+      content: ''; display: block; width: 32px; height: 1px; background: var(--accent);
     }
     .blog-hero h1 {
-      font-size: clamp(36px,5vw,62px); font-weight: 800;
-      letter-spacing: -1.5px; line-height: 1.05; color: var(--fg); margin-bottom: 14px;
+      font-family: var(--display);
+      font-size: clamp(48px,7vw,80px); letter-spacing: 3px;
+      line-height: 0.95; color: var(--fg); margin-bottom: 20px;
     }
-    .blog-hero p { font-size: 18px; color: var(--fg2); max-width: 540px; line-height: 1.7; }
+    .blog-hero p {
+      font-family: var(--sans); font-size: 16px; color: var(--fg2);
+      max-width: 520px; line-height: 1.8;
+    }
 
     /* ── Section wrapper ── */
     .blog-section {
       max-width: 1200px; margin: 0 auto;
-      padding: clamp(40px,5vw,60px) clamp(20px,5vw,64px) 0;
+      padding: clamp(48px,5vw,72px) clamp(20px,5vw,56px) 0;
     }
     .blog-section:last-of-type { padding-bottom: clamp(64px,8vw,100px); }
 
     .blog-section-header {
-      display: flex; align-items: baseline; gap: 14px;
-      margin-bottom: 28px; padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
+      display: flex; align-items: baseline; gap: 16px;
+      margin-bottom: 4px; padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
     }
     .blog-section-title {
-      font-size: clamp(18px,2vw,22px); font-weight: 700; letter-spacing: -0.3px; color: var(--fg);
-      padding-left: 14px; border-left: 3px solid var(--accent);
+      font-family: var(--display);
+      font-size: clamp(24px,3vw,34px); letter-spacing: 2px; color: var(--fg);
     }
-    .blog-section-meta { font-family: var(--mono); font-size: 12px; color: var(--fg3); }
+    .blog-section-meta {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
+      color: var(--fg3); text-transform: uppercase;
+    }
     .blog-section-link {
-      margin-left: auto; font-family: var(--mono); font-size: 13px;
-      color: var(--fg3); text-decoration: none; transition: color 0.15s;
+      margin-left: auto; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+      color: var(--fg3); text-decoration: none; text-transform: uppercase;
+      transition: color 0.15s;
     }
     .blog-section-link:hover { color: var(--accent); }
 
@@ -56,110 +114,154 @@
     .post-list { display: flex; flex-direction: column; }
 
     .post-item {
-      display: flex; align-items: baseline; gap: clamp(12px,3vw,40px);
-      padding: 20px 0; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: clamp(12px,3vw,36px);
+      padding: 22px 20px; border-bottom: 1px solid rgba(255,255,255,0.07);
       text-decoration: none; color: inherit; position: relative;
-      transition: padding-left 0.2s ease;
+      transition: background 0.2s, padding-left 0.2s;
     }
+    .post-item:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
     .post-item::before {
-      content: ''; position: absolute; left: -4px; top: 0; bottom: 0; width: 3px;
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
       background: var(--accent); transform: scaleY(0); transform-origin: center;
-      transition: transform 0.2s ease; border-radius: 2px;
+      transition: transform 0.2s ease;
     }
-    .post-item:first-child { border-top: 1px solid var(--border); }
-    .post-item:hover { padding-left: 12px; }
+    .post-item:hover { background: rgba(255,255,255,0.02); padding-left: 28px; }
     .post-item:hover::before { transform: scaleY(1); }
 
     .post-date {
-      font-family: var(--mono); font-size: 12px; color: var(--fg3);
-      flex-shrink: 0; min-width: 88px;
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+      color: var(--fg3); flex-shrink: 0; min-width: 80px;
+      text-transform: uppercase;
     }
     .post-title-wrap { flex: 1; min-width: 0; }
     .post-title {
-      font-size: clamp(15px,1.2vw + 12px,18px); font-weight: 600;
-      color: var(--fg); line-height: 1.35; margin-bottom: 5px;
+      font-family: var(--condensed);
+      font-size: clamp(15px,1.5vw,19px); font-weight: 600; letter-spacing: 0.04em;
+      color: var(--fg); line-height: 1.3; margin-bottom: 6px;
       transition: color 0.15s;
     }
     .post-item:hover .post-title { color: var(--accent); }
     .post-excerpt {
-      font-size: 13px; color: var(--fg3); line-height: 1.5; margin-bottom: 7px;
+      font-size: 13px; color: var(--fg3); line-height: 1.6; margin-bottom: 8px;
       display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
     }
     .post-tags { display: flex; gap: 6px; flex-wrap: wrap; }
     .post-tag {
-      font-family: var(--mono); font-size: 11px; padding: 3px 9px; border-radius: 4px;
-      background: var(--bg2); color: var(--fg3); border: 1px solid var(--border);
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.05em;
+      padding: 3px 10px; border: 1px solid rgba(255,255,255,0.07);
+      color: var(--fg3);
     }
     .post-badge {
       font-family: var(--mono); font-size: 10px; font-weight: 700;
-      padding: 3px 8px; border-radius: 4px; letter-spacing: 0.05em;
-      flex-shrink: 0; align-self: center;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 4px 10px; flex-shrink: 0; align-self: center;
     }
     .post-badge--site   { background: var(--btn-bg); color: var(--btn-text); }
-    .post-badge--medium { background: transparent; color: var(--fg3); border: 1px solid var(--border); }
+    .post-badge--medium { background: transparent; color: var(--fg3); border: 1px solid rgba(255,255,255,0.1); }
     .post-arrow {
-      font-size: 16px; color: var(--fg3); flex-shrink: 0; align-self: center;
+      font-family: var(--mono); font-size: 14px; color: var(--fg3);
+      flex-shrink: 0; align-self: center;
       transition: color 0.15s, transform 0.2s;
     }
-    .post-item:hover .post-arrow { color: var(--accent); transform: translateX(5px); }
+    .post-item:hover .post-arrow { color: var(--accent); transform: translateX(4px); }
 
-    /* ── States ── */
+    /* ── Feed states ── */
     .feed-loading {
       display: flex; align-items: center; gap: 12px; padding: 36px 0;
-      font-family: var(--mono); font-size: 13px; color: var(--fg3);
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
+      color: var(--fg3); text-transform: uppercase;
     }
     .feed-loading-dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: var(--accent); flex-shrink: 0; animation: pulse 1s infinite;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0;
+      animation: pulse 1s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.4; transform: scale(0.75); }
     }
 
     .feed-empty-box {
-      background: var(--white); border: 1.5px solid var(--border);
-      border-radius: 12px; padding: 40px; display: flex; align-items: flex-start; gap: 20px;
+      border: 1px solid rgba(255,255,255,0.07); padding: 40px;
+      display: flex; align-items: flex-start; gap: 20px;
+      background: rgba(255,255,255,0.02);
     }
     .feed-empty-icon { font-size: 28px; flex-shrink: 0; opacity: 0.4; }
-    .feed-empty-body h3 { font-size: 17px; font-weight: 700; color: var(--fg); margin-bottom: 6px; }
-    .feed-empty-body p  { font-size: 14px; color: var(--fg2); line-height: 1.65; margin-bottom: 14px; }
+    .feed-empty-body h3 {
+      font-family: var(--condensed); font-size: 18px; font-weight: 700;
+      color: var(--fg); margin-bottom: 6px; letter-spacing: 0.04em;
+    }
+    .feed-empty-body p { font-size: 14px; color: var(--fg2); line-height: 1.7; margin-bottom: 14px; }
     .feed-empty-body a {
-      font-family: var(--mono); font-size: 13px; color: var(--btn-text);
-      background: var(--btn-bg); padding: 8px 18px; border-radius: 7px;
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--btn-text);
+      background: var(--btn-bg); padding: 8px 18px;
       text-decoration: none; transition: opacity 0.15s; display: inline-block;
     }
     .feed-empty-body a:hover { opacity: 0.85; }
 
-    /* Last-fetched timestamp */
     .feed-timestamp {
-      font-family: var(--mono); font-size: 11px; color: var(--fg3);
-      margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border);
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+      color: var(--fg3); text-transform: uppercase;
+      margin-top: 16px; padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.07);
     }
 
-    .section-divider { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px,5vw,64px); }
-    .section-divider hr { border: none; border-top: 1px solid var(--border); margin: clamp(40px,5vw,60px) 0 0; }
+    .section-divider {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 clamp(20px,5vw,56px);
+    }
+    .section-divider hr {
+      border: none; border-top: 1px solid rgba(255,255,255,0.07);
+      margin: clamp(40px,5vw,60px) 0 0;
+    }
+
+    /* ── Blog footer ── */
+    .blog-footer {
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+      padding: 28px clamp(20px,5vw,56px);
+      border-top: 1px solid rgba(255,255,255,0.07);
+      background: var(--bg);
+    }
+    .blog-footer span, .blog-footer a {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+      color: var(--fg3); text-decoration: none; text-transform: uppercase;
+    }
+    .blog-footer a { transition: color 0.15s; }
+    .blog-footer a:hover { color: var(--fg); }
+    .blog-footer a:first-of-type { color: var(--accent); }
+    .blog-footer-links { margin-left: auto; display: flex; gap: 20px; }
 
     @media (max-width: 600px) {
-      .post-item { flex-wrap: wrap; gap: 6px; }
+      .blog-nav-links { display: none; }
+      .post-item { padding: 18px 0 18px 0; }
+      .post-item:hover { padding-left: 12px; }
       .post-arrow, .post-badge { display: none; }
       .post-date { min-width: auto; }
+      .blog-footer { flex-direction: column; align-items: flex-start; }
+      .blog-footer-links { margin-left: 0; }
     }
   </style>
 </head>
 <body>
 
-<nav class="page-nav" aria-label="Main navigation">
-  <a href="/" class="nav-logo-small">Mayank Rajput</a>
-  <a href="/">Home</a>
-  <a href="/blog.html" style="color:var(--accent);">Blog</a>
-  <a href="/#contact">Contact</a>
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">☀</button>
+<nav class="blog-nav" aria-label="Main navigation">
+  <a href="/" class="blog-nav-logo">MR</a>
+  <div class="blog-nav-links">
+    <a href="/">Home</a>
+    <a href="/blog.html" class="active">Blog</a>
+    <a href="/#contact">Contact</a>
+  </div>
+  <div class="blog-nav-right">
+    <a href="/#contact" class="blog-nav-cta">Hire me →</a>
+  </div>
 </nav>
 
 <!-- Hero -->
 <div class="blog-hero">
-  <div class="blog-hero-inner">
-    <div class="blog-eyebrow">Writing</div>
-    <h1>Everything I learn,<br>written down.</h1>
-    <p>Technical DevOps deep-dives on this site. Everything else — thoughts, observations, other tech — on Medium.</p>
-  </div>
+  <div class="blog-eyebrow">Writing</div>
+  <h1>EVERYTHING<br>I LEARN,<br>WRITTEN DOWN.</h1>
+  <p>Technical DevOps deep-dives on this site. Everything else — thoughts, observations, other tech — on Medium.</p>
 </div>
 
 
@@ -234,39 +336,22 @@
 </div>
 
 
-<footer>
-  <span>&copy; <span id="currentYear"></span> Mayank Rajput</span>
-  <span>&middot;</span>
+<footer class="blog-footer">
+  <span>© <span id="currentYear"></span> Mayank Rajput</span>
+  <span>·</span>
   <a href="https://techymayank.com">techymayank.com</a>
-  <div class="footer-divider"></div>
-  <a href="https://github.com/mayankrajputofficial" target="_blank" rel="noopener noreferrer">GitHub &rarr;</a>
-  <a href="https://medium.com/@mayankrajputofficial" target="_blank" rel="noopener noreferrer">Medium &rarr;</a>
+  <div class="blog-footer-links">
+    <a href="https://github.com/mayankrajputofficial" target="_blank" rel="noopener noreferrer">GitHub →</a>
+    <a href="https://medium.com/@mayankrajputofficial" target="_blank" rel="noopener noreferrer">Medium →</a>
+  </div>
 </footer>
 
 <script>
 document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-// ── Theme ──────────────────────────────────────────────────────────────────
-(function() {
-  var saved = localStorage.getItem('theme') || 'dark';
-  document.documentElement.setAttribute('data-theme', saved);
-  document.addEventListener('DOMContentLoaded', function() {
-    var btn = document.getElementById('theme-toggle');
-    function updateIcon() {
-      btn.textContent = document.documentElement.getAttribute('data-theme') === 'dark' ? '☀' : '☾';
-    }
-    updateIcon();
-    btn.addEventListener('click', function() {
-      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      var next = isDark ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      updateIcon();
-    });
-  });
-})();
+// Always dark theme
+document.documentElement.setAttribute('data-theme', 'dark');
 
-// ── Medium posts from local JSON file ─────────────────────────────────────
 // This file is generated by GitHub Actions (.github/workflows/fetch-medium.yml)
 // It runs every 6 hours, fetches the Medium RSS server-side (no CORS issue),
 // and commits medium-posts.json back to the repo. The deploy pipeline picks
