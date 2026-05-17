@@ -6,10 +6,18 @@ services:
 
     restart: unless-stopped
 
+    healthcheck:
+      test: ["CMD-SHELL", "pidof nginx || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
     networks:
       - web
 
     labels:
+      - "autoheal=true"
+
       - "traefik.enable=true"
 
       - "traefik.http.routers.portfolio.rule=Host(`techymayank.com`) || Host(`www.techymayank.com`)"
